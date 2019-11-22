@@ -90,11 +90,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git #部署方式
-  repository: https://github.com/anonymous12357/BL.git #关联github仓库
+  repository: git@github.com:anonymous12357/BL.git #关联github仓库
   branch: run-page #部署分支
