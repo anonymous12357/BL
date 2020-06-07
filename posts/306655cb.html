@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Hexo Fluid 主题教程 - Largesse&#39;s blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-06-07 10:00">2020年6月7日 上午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 2.6k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 32 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1 安装Hexo"></a>1 安装Hexo</h2><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>首先下载稳定版 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p><p>安装选项全部默认，一路点击<code>Next</code>。最后安装好之后，按<code>Win+R</code>打开命令提示符，输入<code>node -v</code>和<code>npm -v</code>，如果出现版本号，那么就安装成功了。</p><h4 id="添加国内镜像源"><a href="#添加国内镜像源" class="headerlink" title="添加国内镜像源"></a>添加国内镜像源</h4><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org</code></pre><h4 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h4><p>为了把本地的网页文件上传到github上面去，我们需要用到分布式版本控制工具</p><p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git - Downloading Packagegit-scm.com</a></p><p>安装选项还是全部默认，只不过最后一步添加路径时选择<code>Use Git from the Windows Command Prompt</code>，这样我们就可以直接在命令提示符里打开git了。</p><p>安装完成后在命令提示符中输入<code>git --version</code>验证是否安装成功。</p><p>连接Github步骤参考网上教程</p><h2 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h2><h4 id="全局安装-hexo"><a href="#全局安装-hexo" class="headerlink" title="全局安装 hexo"></a>全局安装 hexo</h4><pre><code class="hljs bash"><span class="hljs-comment"># 如果 npm 安装缓慢可以使用淘宝镜像加速：npm config set registry https://registry.npm.taobao.org</span>
-npm install -g hexo</code></pre><p>安装以后命令行终端输入 <code>hexo -v</code>，如果显示 hexo 信息，则安装成功。</p><p>接下来初始化 hexo，在空文件夹（不能有任何文件，包括隐藏文件）执行命令 <code>hexo init</code>。成功后的目录结构：</p><pre><code class="hljs text">│  .gitignore
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Hexo Fluid 主题教程 - Largesse&#39;s blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Largesse's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 主页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 历史文章</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类文章</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 网站介绍</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle">Hexo Fluid 主题教程</span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-06-07 10:00">2020年6月7日 上午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 2.6k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 32 分钟 </span><span id="leancloud-post-views-container" class="post-meta" style="display:none"><i class="iconfont icon-eye" aria-hidden="true"></i> <span id="leancloud-post-views"></span> 次</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1 安装Hexo"></a>1 安装Hexo</h2><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>首先下载稳定版 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p><p>安装选项全部默认，一路点击<code>Next</code>。最后安装好之后，按<code>Win+R</code>打开命令提示符，输入<code>node -v</code>和<code>npm -v</code>，如果出现版本号，那么就安装成功了。</p><h4 id="添加国内镜像源"><a href="#添加国内镜像源" class="headerlink" title="添加国内镜像源"></a>添加国内镜像源</h4><div class="hljs"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org</code></pre></div><h4 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h4><p>为了把本地的网页文件上传到github上面去，我们需要用到分布式版本控制工具</p><p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git - Downloading Packagegit-scm.com</a></p><p>安装选项还是全部默认，只不过最后一步添加路径时选择<code>Use Git from the Windows Command Prompt</code>，这样我们就可以直接在命令提示符里打开git了。</p><p>安装完成后在命令提示符中输入<code>git --version</code>验证是否安装成功。</p><p>连接Github步骤参考网上教程</p><h2 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h2><h4 id="全局安装-hexo"><a href="#全局安装-hexo" class="headerlink" title="全局安装 hexo"></a>全局安装 hexo</h4><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 如果 npm 安装缓慢可以使用淘宝镜像加速：npm config set registry https://registry.npm.taobao.org</span>
+npm install -g hexo</code></pre></div><p>安装以后命令行终端输入 <code>hexo -v</code>，如果显示 hexo 信息，则安装成功。</p><p>接下来初始化 hexo，在空文件夹（不能有任何文件，包括隐藏文件）执行命令 <code>hexo init</code>。成功后的目录结构：</p><div class="hljs"><pre><code class="hljs text">│  .gitignore
 │  package.json
 │  yarn.lock
 │  _config.yml
@@ -11,25 +11,25 @@ npm install -g hexo</code></pre><p>安装以后命令行终端输入 <code>hexo 
 ├─source
 │  └─_posts
 │       hello-world.md
-└─themes</code></pre><h4 id="安装-fluid-主题"><a href="#安装-fluid-主题" class="headerlink" title="安装 fluid 主题"></a>安装 fluid 主题</h4><p>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases" target="_blank" rel="noopener">最新版</a>并解压到 themes 目录下，重命名为 fluid，然后在博客 _config.yml 设置如下：</p><pre><code class="hljs yml"><span class="hljs-comment"># Extensions</span>
+└─themes</code></pre></div><h4 id="安装-fluid-主题"><a href="#安装-fluid-主题" class="headerlink" title="安装 fluid 主题"></a>安装 fluid 主题</h4><p>下载<a href="https://github.com/fluid-dev/hexo-theme-fluid/releases" target="_blank" rel="noopener">最新版</a>并解压到 themes 目录下，重命名为 fluid，然后在博客 _config.yml 设置如下：</p><div class="hljs"><pre><code class="hljs yml"><span class="hljs-comment"># Extensions</span>
 <span class="hljs-comment">## Plugins: https://hexo.io/plugins/</span>
 <span class="hljs-comment">## Themes: https://hexo.io/themes/</span>
-<span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span></code></pre><h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3 配置"></a>3 配置</h2><p>推荐使用<a href="https://hexo.fluid-dev.com/docs/guide/#覆盖配置" target="_blank" rel="noopener">覆盖设置</a>功能，可以在主题目录之外自定义 config，不用担心更新主题时丢失配置。</p><p>在博客 source 目录中新建 <code>_data</code> 目录（不是主题的 source），再新建两个配置文件：</p><pre><code class="hljs text">fluid_config.yml    # 主题配置在这里修改
-fluid_static_prefix.yml # 静态资源配置在这里修改</code></pre><p>这样主题就会有两个配置文件：</p><ol><li>/source/_data/fluid_config.yml</li><li>/themes/fluid/_config.yml</li></ol><p>1 的优先级高于 2，即 1 中的配置会覆盖掉 2 中同名配置项。</p><h3 id="本地调试"><a href="#本地调试" class="headerlink" title="本地调试"></a>本地调试</h3><p>第一次运行应用先要安装依赖</p><pre><code class="hljs yml"><span class="hljs-comment"># 下面二选一</span>
+<span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span></code></pre></div><h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3 配置"></a>3 配置</h2><p>推荐使用<a href="https://hexo.fluid-dev.com/docs/guide/#覆盖配置" target="_blank" rel="noopener">覆盖设置</a>功能，可以在主题目录之外自定义 config，不用担心更新主题时丢失配置。</p><p>在博客 source 目录中新建 <code>_data</code> 目录（不是主题的 source），再新建两个配置文件：</p><div class="hljs"><pre><code class="hljs text">fluid_config.yml    # 主题配置在这里修改
+fluid_static_prefix.yml # 静态资源配置在这里修改</code></pre></div><p>这样主题就会有两个配置文件：</p><ol><li>/source/_data/fluid_config.yml</li><li>/themes/fluid/_config.yml</li></ol><p>1 的优先级高于 2，即 1 中的配置会覆盖掉 2 中同名配置项。</p><h3 id="本地调试"><a href="#本地调试" class="headerlink" title="本地调试"></a>本地调试</h3><p>第一次运行应用先要安装依赖</p><div class="hljs"><pre><code class="hljs yml"><span class="hljs-comment"># 下面二选一</span>
 <span class="hljs-string">npm</span> <span class="hljs-string">install</span>
 
-<span class="hljs-string">yarn</span> <span class="hljs-string">install</span></code></pre><p>（演示将以 yarn 作为安装工具，可自行替换为 npm）启动服务，用于调试</p><pre><code class="hljs bash"><span class="hljs-comment"># 三选一</span>
+<span class="hljs-string">yarn</span> <span class="hljs-string">install</span></code></pre></div><p>（演示将以 yarn 作为安装工具，可自行替换为 npm）启动服务，用于调试</p><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 三选一</span>
 npm run server
 yarn run server
-hexo s <span class="hljs-comment"># hexo server 的简写</span></code></pre><h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><pre><code class="hljs bash">hexo clean &amp;&amp; hexo g</code></pre><h3 id="压缩（可选）"><a href="#压缩（可选）" class="headerlink" title="压缩（可选）"></a>压缩（可选）</h3><p>可以使用 <a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">hexo-all-minifier</a> 插件对生成的文件和图片进行压缩，大致步骤：</p><p>先安装插件：</p><pre><code class="hljs bash">npm i hexo-all-minifier --save
+hexo s <span class="hljs-comment"># hexo server 的简写</span></code></pre></div><h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><div class="hljs"><pre><code class="hljs bash">hexo clean &amp;&amp; hexo g</code></pre></div><h3 id="压缩（可选）"><a href="#压缩（可选）" class="headerlink" title="压缩（可选）"></a>压缩（可选）</h3><p>可以使用 <a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">hexo-all-minifier</a> 插件对生成的文件和图片进行压缩，大致步骤：</p><p>先安装插件：</p><div class="hljs"><pre><code class="hljs bash">npm i hexo-all-minifier --save
 
 <span class="hljs-comment"># Mac 系统还需要额外安装</span>
-brew install libtool automake autoconf nasm</code></pre><p>然后在博客配置中加入：</p><pre><code class="hljs yaml"><span class="hljs-attr">all_minifier:</span> <span class="hljs-literal">true</span></code></pre><p>这样即可快速使用。</p><p>具体的细节配置可参考<a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">官方文档</a></p><h3 id="使用-jsDelivr-服务（可选）"><a href="#使用-jsDelivr-服务（可选）" class="headerlink" title="使用 jsDelivr 服务（可选）"></a>使用 jsDelivr 服务（可选）</h3><p>插入来自 Github 仓库的图片，由于网络情况可能会出现加载慢和无法加载的情况，我们可以使用 <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener">jsDelivr</a> 来加速图片文件等媒体文件的加载。</p><p>通常情况下，可以新建一个仓库来存放这些文件，目前已知的有图片、视频和引用的相关文件可以使用，Github 仓库最大上传文件为 25M，请注意文件大小。</p><p>使用方法（文件的绝对地址）</p><pre><code class="hljs text">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</code></pre><p>相关实例（博客仓库下 master 分支里 favicon 图片文件）</p><pre><code class="hljs text">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;fluid-dev&#x2F;hexo-theme-fluid@master&#x2F;source&#x2F;img&#x2F;favicon.png</code></pre><h2 id="4-部署"><a href="#4-部署" class="headerlink" title="4 部署"></a>4 部署</h2><p>这里演示如何部署到 GitHub Pages 中。</p><p>在博客配置中设置部署仓库，参考如下：</p><pre><code class="hljs yml"><span class="hljs-comment"># Deployment</span>
+brew install libtool automake autoconf nasm</code></pre></div><p>然后在博客配置中加入：</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-attr">all_minifier:</span> <span class="hljs-literal">true</span></code></pre></div><p>这样即可快速使用。</p><p>具体的细节配置可参考<a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">官方文档</a></p><h3 id="使用-jsDelivr-服务（可选）"><a href="#使用-jsDelivr-服务（可选）" class="headerlink" title="使用 jsDelivr 服务（可选）"></a>使用 jsDelivr 服务（可选）</h3><p>插入来自 Github 仓库的图片，由于网络情况可能会出现加载慢和无法加载的情况，我们可以使用 <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener">jsDelivr</a> 来加速图片文件等媒体文件的加载。</p><p>通常情况下，可以新建一个仓库来存放这些文件，目前已知的有图片、视频和引用的相关文件可以使用，Github 仓库最大上传文件为 25M，请注意文件大小。</p><p>使用方法（文件的绝对地址）</p><div class="hljs"><pre><code class="hljs text">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</code></pre></div><p>相关实例（博客仓库下 master 分支里 favicon 图片文件）</p><div class="hljs"><pre><code class="hljs text">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;fluid-dev&#x2F;hexo-theme-fluid@master&#x2F;source&#x2F;img&#x2F;favicon.png</code></pre></div><h2 id="4-部署"><a href="#4-部署" class="headerlink" title="4 部署"></a>4 部署</h2><p>这里演示如何部署到 GitHub Pages 中。</p><p>在博客配置中设置部署仓库，参考如下：</p><div class="hljs"><pre><code class="hljs yml"><span class="hljs-comment"># Deployment</span>
 <span class="hljs-comment">## Docs: https://hexo.io/docs/deployment.html</span>
 <span class="hljs-attr">deploy:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">git</span>
     <span class="hljs-attr">repo:</span> <span class="hljs-string">git@github.com:username/username.github.io.git</span>
-    <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span></code></pre><p>将你的 ssh 密钥上传到远程仓库，如果未设置则需要手工输入用户名和密码。然在终端命令行：</p><pre><code class="hljs bash">hexo d</code></pre><h2 id="5-更新主题"><a href="#5-更新主题" class="headerlink" title="5 更新主题"></a>5 更新主题</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>TIP</p><p>适用于没有自行修改任何代码的情况（配置文件除外）</p><ol><li>将自己的配置文件备份（如果完整使用<a href="https://hexo.fluid-dev.com/docs/guide/#覆盖配置" target="_blank" rel="noopener">覆盖配置</a>功能可忽略此步骤）</li><li>将 fluid 文件夹全部删除，重新下载 <a href="https://github.com/fluid-dev/hexo-theme-fluid/releases" target="_blank" rel="noopener">release</a> 并解压</li><li>如果某些配置发生了变化（改名或弃用），release 的说明里会特别提示，同步修改原配置文件即可。</li></ol><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>TIP</p><p>适用于自定义了一些代码，或想体验 master 分支的情况</p><ol><li>确定自己的 fluid 目录已经开启 git，并且所有改动都已 commit</li><li>把 fluid 仓库的 master 分支拉取到自己的分支上（可新建一个分支再拉取）</li></ol><pre><code class="hljs bash">git pull https://github.com/fluid-dev/hexo-theme-fluid.git master</code></pre><ol><li>解决代码冲突，保留自己修改的部分（如何解决冲突可自行搜索）</li></ol><h2 id="5-加快网页加载"><a href="#5-加快网页加载" class="headerlink" title="5 加快网页加载"></a>5 加快网页加载</h2><ul><li>对于所有用户，将各种第三方库配置公共 CDN 是最有效的方式，可以通过配置 <code>_static_prefix.yml</code> 来链接（默认已经使用 staticfile CDN，国内用户可不做改动）；</li><li>如果你的域名已备案，可以使用<a href="https://portal.qiniu.com/signup?code=1hlwhx3ztjz2q" target="_blank" rel="noopener">七牛云</a>、阿里云、腾讯云等大厂的 OSS 服务并绑定域名，将生成后的 public 目录下全部上传到 OSS，然后你不仅可以无服务器部署博客，加载速度也将无可比拟；</li><li>没有备案，也可以通过香港及海外地区的云，或者私有 CDN 等方式进行加速，推荐一份 <a href="https://www.julydate.com/post/60859300" target="_blank" rel="noopener">CDN 使用指南</a>。</li><li>如果图片是存在 source 目录中，建议搭配 <a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">hexo-all-minifier</a> 插件，可自动对图片进行压缩；</li><li>如果是存放在外部的图片，建议先使用 <a href="https://tinypng.com/" target="_blank" rel="noopener">tinypng</a> 进行压缩。</li></ul><h2 id="6-改造更多功能"><a href="#6-改造更多功能" class="headerlink" title="6 改造更多功能"></a>6 改造更多功能</h2><p>TIP</p><p>部分功能需要修改主题源代码，可能对今后更新造成困扰，请根据自己需求使用，并检查是否有冲突，建议提前做好备份</p><h3 id="网站运行时间统计"><a href="#网站运行时间统计" class="headerlink" title="网站运行时间统计"></a>网站运行时间统计</h3><p>本段代码来源于<a href="http://www.liangz.org/245.html" target="_blank" rel="noopener">网络</a>。在主题目录 <code>fluid/layout/_partial/footer.ejs</code> 文件中对应位置添加相关代码。</p><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span></code></pre></div><p>将你的 ssh 密钥上传到远程仓库，如果未设置则需要手工输入用户名和密码。然在终端命令行：</p><div class="hljs"><pre><code class="hljs bash">hexo d</code></pre></div><h2 id="5-更新主题"><a href="#5-更新主题" class="headerlink" title="5 更新主题"></a>5 更新主题</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>TIP</p><p>适用于没有自行修改任何代码的情况（配置文件除外）</p><ol><li>将自己的配置文件备份（如果完整使用<a href="https://hexo.fluid-dev.com/docs/guide/#覆盖配置" target="_blank" rel="noopener">覆盖配置</a>功能可忽略此步骤）</li><li>将 fluid 文件夹全部删除，重新下载 <a href="https://github.com/fluid-dev/hexo-theme-fluid/releases" target="_blank" rel="noopener">release</a> 并解压</li><li>如果某些配置发生了变化（改名或弃用），release 的说明里会特别提示，同步修改原配置文件即可。</li></ol><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>TIP</p><p>适用于自定义了一些代码，或想体验 master 分支的情况</p><ol><li>确定自己的 fluid 目录已经开启 git，并且所有改动都已 commit</li><li>把 fluid 仓库的 master 分支拉取到自己的分支上（可新建一个分支再拉取）</li></ol><div class="hljs"><pre><code class="hljs bash">git pull https://github.com/fluid-dev/hexo-theme-fluid.git master</code></pre></div><ol><li>解决代码冲突，保留自己修改的部分（如何解决冲突可自行搜索）</li></ol><h2 id="5-加快网页加载"><a href="#5-加快网页加载" class="headerlink" title="5 加快网页加载"></a>5 加快网页加载</h2><ul><li>对于所有用户，将各种第三方库配置公共 CDN 是最有效的方式，可以通过配置 <code>_static_prefix.yml</code> 来链接（默认已经使用 staticfile CDN，国内用户可不做改动）；</li><li>如果你的域名已备案，可以使用<a href="https://portal.qiniu.com/signup?code=1hlwhx3ztjz2q" target="_blank" rel="noopener">七牛云</a>、阿里云、腾讯云等大厂的 OSS 服务并绑定域名，将生成后的 public 目录下全部上传到 OSS，然后你不仅可以无服务器部署博客，加载速度也将无可比拟；</li><li>没有备案，也可以通过香港及海外地区的云，或者私有 CDN 等方式进行加速，推荐一份 <a href="https://www.julydate.com/post/60859300" target="_blank" rel="noopener">CDN 使用指南</a>。</li><li>如果图片是存在 source 目录中，建议搭配 <a href="https://github.com/chenzhutian/hexo-all-minifier" target="_blank" rel="noopener">hexo-all-minifier</a> 插件，可自动对图片进行压缩；</li><li>如果是存放在外部的图片，建议先使用 <a href="https://tinypng.com/" target="_blank" rel="noopener">tinypng</a> 进行压缩。</li></ul><h2 id="6-改造更多功能"><a href="#6-改造更多功能" class="headerlink" title="6 改造更多功能"></a>6 改造更多功能</h2><p>TIP</p><p>部分功能需要修改主题源代码，可能对今后更新造成困扰，请根据自己需求使用，并检查是否有冲突，建议提前做好备份</p><h3 id="网站运行时间统计"><a href="#网站运行时间统计" class="headerlink" title="网站运行时间统计"></a>网站运行时间统计</h3><p>本段代码来源于<a href="http://www.liangz.org/245.html" target="_blank" rel="noopener">网络</a>。在主题目录 <code>fluid/layout/_partial/footer.ejs</code> 文件中对应位置添加相关代码。</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"timeDate"</span>&gt;</span>载入天数...<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"times"</span>&gt;</span>载入时分秒...<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
@@ -59,7 +59,7 @@ brew install libtool automake autoconf nasm</code></pre><p>然后在博客配置
   &#125;
 <span class="actionscript">  setInterval(<span class="hljs-string">"createtime()"</span>,<span class="hljs-number">250</span>);</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre><h3 id="一言"><a href="#一言" class="headerlink" title="一言"></a>一言</h3><p>一言在博客网站中非常常见，正如它所说，用代码表达言语的魅力。在页面中，使用直接添加添加如下代码即可。在主题目录 <code>fluid/layout/_partial/footer.ejs</code> 文件中对应位置添加相关代码。以下代码为默认使用示例，如需要定制，请到 <a href="https://developer.hitokoto.cn/" target="_blank" rel="noopener">hitokoto developer</a> 中查看详情。</p><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"hitokoto"</span>&gt;</span>:D 获取中...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div><h3 id="一言"><a href="#一言" class="headerlink" title="一言"></a>一言</h3><p>一言在博客网站中非常常见，正如它所说，用代码表达言语的魅力。在页面中，使用直接添加添加如下代码即可。在主题目录 <code>fluid/layout/_partial/footer.ejs</code> 文件中对应位置添加相关代码。以下代码为默认使用示例，如需要定制，请到 <a href="https://developer.hitokoto.cn/" target="_blank" rel="noopener">hitokoto developer</a> 中查看详情。</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"hitokoto"</span>&gt;</span>:D 获取中...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
 <span class="actionscript">  fetch(<span class="hljs-string">'https://v1.hitokoto.cn'</span>)</span>
 <span class="javascript">    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json())</span>
@@ -68,38 +68,213 @@ brew install libtool automake autoconf nasm</code></pre><p>然后在博客配置
       hitokoto.innerText = data.hitokoto
       &#125;)
 <span class="javascript">      .catch(<span class="hljs-built_in">console</span>.error)</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3 id="在新建页面添加评论"><a href="#在新建页面添加评论" class="headerlink" title="在新建页面添加评论"></a>在新建页面添加评论</h3><p>目前，主题配置文件只能在文章页面添加评论，如果需要在新建的页面添加评论插件，请在打开评论插件的情况下，在文章页面查看评论插件对应的 HTML 代码，并添加到页面的 Markdown 文件中。</p><h2 id="7-Front-matter概念"><a href="#7-Front-matter概念" class="headerlink" title="7 Front-matter概念"></a>7 Front-matter概念</h2><p><strong>来源于<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></strong></p><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><h3 id="在新建页面添加评论"><a href="#在新建页面添加评论" class="headerlink" title="在新建页面添加评论"></a>在新建页面添加评论</h3><p>目前，主题配置文件只能在文章页面添加评论，如果需要在新建的页面添加评论插件，请在打开评论插件的情况下，在文章页面查看评论插件对应的 HTML 代码，并添加到页面的 Markdown 文件中。</p><h2 id="7-Front-matter概念"><a href="#7-Front-matter概念" class="headerlink" title="7 Front-matter概念"></a>7 Front-matter概念</h2><p><strong>来源于<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></strong></p><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2013</span><span class="hljs-string">/7/13</span> <span class="hljs-number">20</span><span class="hljs-string">:46:25</span>
-<span class="hljs-meta">---</span></code></pre><p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p><div class="table-container"><table><thead><tr><th style="text-align:left">参数</th><th style="text-align:left">描述</th><th style="text-align:left">默认值</th></tr></thead><tbody><tr><td style="text-align:left"><code>layout</code></td><td style="text-align:left">布局</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>title</code></td><td style="text-align:left">标题</td><td style="text-align:left">文章的文件名</td></tr><tr><td style="text-align:left"><code>date</code></td><td style="text-align:left">建立日期</td><td style="text-align:left">文件建立日期</td></tr><tr><td style="text-align:left"><code>updated</code></td><td style="text-align:left">更新日期</td><td style="text-align:left">文件更新日期</td></tr><tr><td style="text-align:left"><code>comments</code></td><td style="text-align:left">开启文章的评论功能</td><td style="text-align:left">true</td></tr><tr><td style="text-align:left"><code>tags</code></td><td style="text-align:left">标签（不适用于分页）</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>categories</code></td><td style="text-align:left">分类（不适用于分页）</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>permalink</code></td><td style="text-align:left">覆盖文章网址</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>keywords</code></td><td style="text-align:left">仅用于 meta 标签和 Open Graph 的关键词（不推荐使用）</td></tr></tbody></table></div><h3 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h3><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p><pre><code class="hljs subunit">categories:
+<span class="hljs-meta">---</span></code></pre></div><p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p><div class="table-container"><table><thead><tr><th style="text-align:left">参数</th><th style="text-align:left">描述</th><th style="text-align:left">默认值</th></tr></thead><tbody><tr><td style="text-align:left"><code>layout</code></td><td style="text-align:left">布局</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>title</code></td><td style="text-align:left">标题</td><td style="text-align:left">文章的文件名</td></tr><tr><td style="text-align:left"><code>date</code></td><td style="text-align:left">建立日期</td><td style="text-align:left">文件建立日期</td></tr><tr><td style="text-align:left"><code>updated</code></td><td style="text-align:left">更新日期</td><td style="text-align:left">文件更新日期</td></tr><tr><td style="text-align:left"><code>comments</code></td><td style="text-align:left">开启文章的评论功能</td><td style="text-align:left">true</td></tr><tr><td style="text-align:left"><code>tags</code></td><td style="text-align:left">标签（不适用于分页）</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>categories</code></td><td style="text-align:left">分类（不适用于分页）</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>permalink</code></td><td style="text-align:left">覆盖文章网址</td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><code>keywords</code></td><td style="text-align:left">仅用于 meta 标签和 Open Graph 的关键词（不推荐使用）</td></tr></tbody></table></div><h3 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h3><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p><div class="hljs"><pre><code class="hljs subunit">categories:
 - Diary
 <span class="hljs-keyword">tags:</span>
 - PS3
-- Games</code></pre><blockquote><p>分类方法的分歧</p><p>如果您有过使用 WordPress 的经验，就很容易误解 Hexo 的分类方式。WordPress 支持对一篇文章设置多个分类，而且这些分类可以是同级的，也可以是父子分类。但是 Hexo 不支持指定多个同级分类。下面的指定方法：</p><pre><code class="hljs markdown">categories:
+- Games</code></pre></div><blockquote><p>分类方法的分歧</p><p>如果您有过使用 WordPress 的经验，就很容易误解 Hexo 的分类方式。WordPress 支持对一篇文章设置多个分类，而且这些分类可以是同级的，也可以是父子分类。但是 Hexo 不支持指定多个同级分类。下面的指定方法：</p><div class="hljs"><pre><code class="hljs markdown">categories:
 <span class="hljs-bullet">  - </span>Diary
-<span class="hljs-bullet">  - </span>Life</code></pre><p>会使分类<code>Life</code>成为<code>Diary</code>的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p><p>如果你需要为文章添加多个分类，可以尝试以下 list 中的方法。</p><pre><code class="hljs asciidoc">categories:
+<span class="hljs-bullet">  - </span>Life</code></pre></div><p>会使分类<code>Life</code>成为<code>Diary</code>的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p><p>如果你需要为文章添加多个分类，可以尝试以下 list 中的方法。</p><div class="hljs"><pre><code class="hljs asciidoc">categories:
 <span class="hljs-bullet">- </span>[Diary, PlayStation]
 <span class="hljs-bullet">- </span>[Diary, Games]
-<span class="hljs-bullet">- </span>[Life]</code></pre><p>此时这篇文章同时包括三个分类： <code>PlayStation</code> 和 <code>Games</code> 分别都是父分类 <code>Diary</code> 的子分类，同时 <code>Life</code> 是一个没有子分类的分类。</p></blockquote><h2 id="8-主题设置节选"><a href="#8-主题设置节选" class="headerlink" title="8 主题设置节选"></a>8 主题设置节选</h2><p><strong>来源：<a href="https://hexo.fluid-dev.com/docs/guide/" target="_blank" rel="noopener">https://hexo.fluid-dev.com/docs/guide/</a></strong></p><h3 id="文章页"><a href="#文章页" class="headerlink" title="文章页"></a>文章页</h3><h4 id="文章在首页的略缩图"><a href="#文章在首页的略缩图" class="headerlink" title="文章在首页的略缩图"></a>文章在首页的略缩图</h4><p>在文章开头 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Front-matter</a> 中配置 <code>index_img</code> 属性。</p><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-bullet">- </span>[Life]</code></pre></div><p>此时这篇文章同时包括三个分类： <code>PlayStation</code> 和 <code>Games</code> 分别都是父分类 <code>Diary</code> 的子分类，同时 <code>Life</code> 是一个没有子分类的分类。</p></blockquote><h2 id="8-主题设置节选"><a href="#8-主题设置节选" class="headerlink" title="8 主题设置节选"></a>8 主题设置节选</h2><p><strong>来源：<a href="https://hexo.fluid-dev.com/docs/guide/" target="_blank" rel="noopener">https://hexo.fluid-dev.com/docs/guide/</a></strong></p><h3 id="文章页"><a href="#文章页" class="headerlink" title="文章页"></a>文章页</h3><h4 id="文章在首页的略缩图"><a href="#文章在首页的略缩图" class="headerlink" title="文章在首页的略缩图"></a>文章在首页的略缩图</h4><p>在文章开头 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Front-matter</a> 中配置 <code>index_img</code> 属性。</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">文章标题</span>
 <span class="hljs-attr">tags:</span> <span class="hljs-string">[Hexo,</span> <span class="hljs-string">Fluid]</span>
 <span class="hljs-attr">index_img:</span> <span class="hljs-string">/img/example.jpg</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2019</span><span class="hljs-number">-10</span><span class="hljs-number">-10</span> <span class="hljs-number">10</span><span class="hljs-string">:00:00</span>
 <span class="hljs-meta">---</span>
-<span class="hljs-string">以下是文章内容</span></code></pre><p>和 Banner 配置相同，<code>/img/example.jpg</code> 对应的是存放在 <code>/source/img/example.jpg</code> 目录下的图片（目录也可自定义，但必须在 source 目录下）。</p><p>也可以使用外链 Url 的绝对路径。</p><h4 id="文章页顶部大图"><a href="#文章页顶部大图" class="headerlink" title="文章页顶部大图"></a>文章页顶部大图</h4><p>默认显示<strong>主题配置</strong>中的 <code>post.banner_img</code>，如需要设置单个文章的 Banner，在 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Front-matter</a> 中指定 banner_img 属性。</p><p>本地图片存放位置同上。</p><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
+<span class="hljs-string">以下是文章内容</span></code></pre></div><p>和 Banner 配置相同，<code>/img/example.jpg</code> 对应的是存放在 <code>/source/img/example.jpg</code> 目录下的图片（目录也可自定义，但必须在 source 目录下）。</p><p>也可以使用外链 Url 的绝对路径。</p><h4 id="文章页顶部大图"><a href="#文章页顶部大图" class="headerlink" title="文章页顶部大图"></a>文章页顶部大图</h4><p>默认显示<strong>主题配置</strong>中的 <code>post.banner_img</code>，如需要设置单个文章的 Banner，在 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Front-matter</a> 中指定 banner_img 属性。</p><p>本地图片存放位置同上。</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">title:</span> <span class="hljs-string">文章标题</span>
 <span class="hljs-attr">tags:</span> <span class="hljs-string">[Hexo,</span> <span class="hljs-string">Fluid]</span>
 <span class="hljs-attr">index_img:</span> <span class="hljs-string">/img/example.jpg</span>
 <span class="hljs-attr">banner_img:</span> <span class="hljs-string">/img/post_banner.jpg</span>
 <span class="hljs-attr">date:</span> <span class="hljs-number">2019</span><span class="hljs-number">-10</span><span class="hljs-number">-10</span> <span class="hljs-number">10</span><span class="hljs-string">:00:00</span>
 <span class="hljs-meta">---</span>
-<span class="hljs-string">以下是文章内容</span></code></pre><h4 id="文章内容图片"><a href="#文章内容图片" class="headerlink" title="文章内容图片"></a>文章内容图片</h4><p>本地图片存放位置同上。</p><pre><code class="hljs markdown">![](/img/example.jpg)</code></pre></article><hr><div><div class="post-metas mb-3"><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a> <a class="hover-with-bg" href="/tags/Fluid/">Fluid</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"></div><div class="post-next col-6"><a href="/posts/a040f7b3.html"><span class="hidden-mobile">Iptables 常用命令,选项,参数及实例整理收集</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("06/06/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div><p id="hitokoto">:D 获取中...</p><script>fetch('https://v1.hitokoto.cn')
+<span class="hljs-string">以下是文章内容</span></code></pre></div><h4 id="文章内容图片"><a href="#文章内容图片" class="headerlink" title="文章内容图片"></a>文章内容图片</h4><p>本地图片存放位置同上。</p><div class="hljs"><pre><code class="hljs markdown">![](/img/example.jpg)</code></pre></div></article><hr><div><div class="post-metas mb-3"><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a> <a class="hover-with-bg" href="/tags/Fluid/">Fluid</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"></div><div class="post-next col-6"><a href="/posts/a040f7b3.html"><span class="hidden-mobile">Iptables 常用命令,选项,参数及实例整理收集</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"U5EjlpwRPtyuJbkw3W4fnYmS-MdYXbMMI",app_key:"KwvDqIaX2gD0Uz16BBBFOFpe",placeholder:"说点什么",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!1,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="statistics"><span id="leancloud-site-pv-container" style="display:none">总访问量 <span id="leancloud-site-pv"></span> 次 </span><span id="leancloud-site-uv-container" style="display:none">总访客数 <span id="leancloud-site-uv"></span> 人</span></div></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("06/06/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div><p id="hitokoto">:D 获取中...</p><script>fetch('https://v1.hitokoto.cn')
     .then(response => response.json())
     .then(data => {
       const hitokoto = document.getElementById('hitokoto')
       hitokoto.innerText = data.hitokoto
       })
-      .catch(console.error)</script></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Hexo Fluid 主题教程&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+      .catch(console.error)</script></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script defer>(function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/posts/306655cb.html');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'daehpApznWemki2mAr5g5iUk-MdYXbMMI'
+    var app_key = '7k2qX6C31gEh2CuXOSKXyYW3'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();</script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -109,4 +284,4 @@ brew install libtool automake autoconf nasm</code></pre><p>然后在博客配置
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script></body></html>
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script defer>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-168739774-1","auto"),ga("send","pageview")</script></body></html>
