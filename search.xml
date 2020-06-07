@@ -1170,43 +1170,6 @@ http://karpathy.github.io/2019/04/25/recipe/
 </code></pre></div>]]></content>
   </entry>
   <entry>
-    <title>零基础入门CV - Task5 模型集成</title>
-    <url>/posts/1e52eb39.html</url>
-    <content><![CDATA[<h3 id="1-1-学习目标"><a href="#1-1-学习目标" class="headerlink" title="1.1 学习目标"></a>1.1 学习目标</h3><ul><li>学习集成学习方法以及交叉验证情况下的模型集成</li><li>学会使用深度学习模型的集成学习</li></ul><h3 id="2-2-集成学习方法"><a href="#2-2-集成学习方法" class="headerlink" title="2.2 集成学习方法"></a>2.2 集成学习方法</h3><p>在机器学习中的集成学习可以在一定程度上提高预测精度，常见的集成学习方法有Stacking、Bagging和Boosting，同时这些集成学习方法与具体验证集划分联系紧密。</p><p>由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。</p><p>下面假设构建了10折交叉验证，训练得到10个CNN模型。<br><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task05/交叉验证.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task05/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81.png" srcset="/img/loading.gif" alt="IMG"></a></p><p>那么在10个CNN模型可以使用如下方式进行集成：</p><ul><li>对预测的结果的概率值进行平均，然后解码为具体字符；</li><li>对预测的字符进行投票，得到最终字符。</li></ul><h3 id="2-3-深度学习中的集成学习"><a href="#2-3-深度学习中的集成学习" class="headerlink" title="2.3 深度学习中的集成学习"></a>2.3 深度学习中的集成学习</h3><p>此外在深度学习中本身还有一些集成学习思路的做法，值得借鉴学习：</p><h4><a href="#" class="headerlink"></a></h4><h4 id="2-3-1-Dropout"><a href="#2-3-1-Dropout" class="headerlink" title="2.3.1 Dropout"></a>2.3.1 Dropout</h4><p>Dropout可以作为训练深度神经网络的一种技巧。在每个训练批次中，通过随机让一部分的节点停止工作。同时在预测的过程中让所有的节点都其作用。<br><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task05/Droopout.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task05/Droopout.png" srcset="/img/loading.gif" alt="IMG"></a></p><p>Dropout经常出现在在先有的CNN网络中，可以有效的缓解模型过拟合的情况，也可以在预测时增加模型的精度。</p><p>加入Dropout后的网络结构如下：</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-comment"># 定义模型</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SVHN_Model1</span><span class="hljs-params">(nn.Module)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
-        super(SVHN_Model1, self).__init__()
-        <span class="hljs-comment"># CNN提取特征模块</span>
-        self.cnn = nn.Sequential(
-            nn.Conv2d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), stride=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)),
-            nn.ReLU(),
-            nn.Dropout(<span class="hljs-number">0.25</span>),
-            nn.MaxPool2d(<span class="hljs-number">2</span>),
-            nn.Conv2d(<span class="hljs-number">16</span>, <span class="hljs-number">32</span>, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), stride=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)),
-            nn.ReLU(), 
-            nn.Dropout(<span class="hljs-number">0.25</span>),
-            nn.MaxPool2d(<span class="hljs-number">2</span>),
-        )
-        <span class="hljs-comment"># </span>
-        self.fc1 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-        self.fc2 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-        self.fc3 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-        self.fc4 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-        self.fc5 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-        self.fc6 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
-    
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, img)</span>:</span>        
-        feat = self.cnn(img)
-        feat = feat.view(feat.shape[<span class="hljs-number">0</span>], <span class="hljs-number">-1</span>)
-        c1 = self.fc1(feat)
-        c2 = self.fc2(feat)
-        c3 = self.fc3(feat)
-        c4 = self.fc4(feat)
-        c5 = self.fc5(feat)
-        c6 = self.fc6(feat)
-        <span class="hljs-keyword">return</span> c1, c2, c3, c4, c5, c6</code></pre></div><h4 id="2-3-2-TTA"><a href="#2-3-2-TTA" class="headerlink" title="2.3.2 TTA"></a>2.3.2 TTA</h4><p>测试集数据扩增（Test Time Augmentation，简称TTA）也是常用的集成学习技巧，数据扩增不仅可以在训练时候用，而且可以同样在预测时候进行数据扩增，对同一个样本预测三次，然后对三次结果进行平均。</p><script src="https://gist.github.com/anonymous12357/7d4743cebd30381bc9b8f3cae92afd3b.js"></script>]]></content>
-  </entry>
-  <entry>
     <title>零基础入门CV task1</title>
     <url>/posts/ab419b1c.html</url>
     <content><![CDATA[<p>比赛地址：<a href="https://tianchi.aliyun.com/competition/entrance/531795/introduction" target="_blank" rel="noopener">https://tianchi.aliyun.com/competition/entrance/531795/introduction</a></p><h2 id="1-赛题理解"><a href="#1-赛题理解" class="headerlink" title="1 赛题理解"></a>1 赛题理解</h2><ul><li>赛题名称：零基础入门CV之街道字符识别</li><li>赛题目标：通过这道赛题可以引导大家走入计算机视觉的世界，主要针对竞赛选手上手视觉赛题，提高对数据建模能力。</li><li>赛题任务：赛题以计算机视觉中字符识别为背景，要求选手预测街道字符编码，这是一个典型的字符识别问题。<br>为了简化赛题难度，赛题数据采用公开数据集<a href="http://ufldl.stanford.edu/housenumbers/" target="_blank" rel="noopener">SVHN</a>，因此大家可以选择很多相应的paper作为思路参考。</li></ul><h3 id="1-1-学习目标"><a href="#1-1-学习目标" class="headerlink" title="1.1 学习目标"></a>1.1 学习目标</h3><ul><li>理解赛题背景和赛题数据</li><li>完成赛题报名和数据下载，理解赛题的解题思路</li></ul><h3 id="1-2-赛题数据"><a href="#1-2-赛题数据" class="headerlink" title="1.2 赛题数据"></a>1.2 赛题数据</h3><p>赛题以街道字符为为赛题数据，数据集报名后可见并可下载，该数据来自收集的SVHN街道字符，并进行了匿名采样处理。</p><p><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/赛事简介/数据集样本展示.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/%E8%B5%9B%E4%BA%8B%E7%AE%80%E4%BB%8B/%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%B7%E6%9C%AC%E5%B1%95%E7%A4%BA.png" srcset="/img/loading.gif" alt="数据示例"></a></p><p>注意: 按照比赛规则，所有的参赛选手只能使用比赛给定的数据集完成训练，不能使用SVHN原始数据集进行训练。比赛结束后将会对Top选手进行代码审核，违规的选手将清除排行榜成绩。</p><p>训练集数据包括3W张照片，验证集数据包括1W张照片，每张照片包括颜色图像和对应的编码类别和具体位置；为了保证比赛的公平性，测试集A包括4W张照片，测试集B包括4W张照片。</p><p>需要注意的是本赛题需要选手识别图片中所有的字符，为了降低比赛难度，我们提供了训练集、验证集中所有字符的位置框。</p><h3 id="1-3-数据标签"><a href="#1-3-数据标签" class="headerlink" title="1.3 数据标签"></a>1.3 数据标签</h3><p>对于训练数据每张图片将给出对于的编码标签，和具体的字符框的位置（训练集、验证集都给出字符位置），可用于模型训练：</p><div class="table-container"><table><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody><tr><td>top</td><td>左上角坐标X</td></tr><tr><td>height</td><td>字符高度</td></tr><tr><td>left</td><td>左上角最表Y</td></tr><tr><td>width</td><td>字符宽度</td></tr><tr><td>label</td><td>字符编码</td></tr></tbody></table></div><p>字符的坐标具体如下所示：<br><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task01/字符坐标.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task01/%E5%AD%97%E7%AC%A6%E5%9D%90%E6%A0%87.png" srcset="/img/loading.gif" alt="坐标"></a></p><p>在比赛数据（训练集和验证集）中，同一张图片中可能包括一个或者多个字符，因此在比赛数据的JSON标注中，会有两个字符的边框信息：</p><div class="table-container"><table><thead><tr><th>原始图片</th><th>图片JSON标注</th></tr></thead><tbody><tr><td><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task01/原始图片.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task01/%E5%8E%9F%E5%A7%8B%E5%9B%BE%E7%89%87.png" srcset="/img/loading.gif" alt="19"></a></td><td><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task01/原始图片标注.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task01/%E5%8E%9F%E5%A7%8B%E5%9B%BE%E7%89%87%E6%A0%87%E6%B3%A8.png" srcset="/img/loading.gif" alt="标注"></a></td></tr></tbody></table></div><h3 id="1-4-评测指标"><a href="#1-4-评测指标" class="headerlink" title="1.4 评测指标"></a>1.4 评测指标</h3><p>选手提交结果与实际图片的编码进行对比，以编码整体识别准确率为评价指标。任何一个字符错误都为错误，最终评测指标结果越大越好，具体计算公式如下：<br>Score=编码识别正确的数量/测试集图片数量</p><h3 id="1-5-读取数据"><a href="#1-5-读取数据" class="headerlink" title="1.5 读取数据"></a>1.5 读取数据</h3><p>为了方便大家进行数据读取，在此我们给出JSON中标签的读取方式：</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">import</span> json
@@ -1245,6 +1208,43 @@ conda install pytorch torchvision cudatoolkit=<span class="hljs-number">9.2</spa
 
 <span class="hljs-comment"># 安装其他依赖包</span>
 pip install -i <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/pypi.tuna.tsinghua.edu.cn/simple</span> jupyter tqdm opencv-python matplotlib pandas</code></pre></div>]]></content>
+  </entry>
+  <entry>
+    <title>零基础入门CV - Task5 模型集成</title>
+    <url>/posts/1e52eb39.html</url>
+    <content><![CDATA[<h3 id="1-1-学习目标"><a href="#1-1-学习目标" class="headerlink" title="1.1 学习目标"></a>1.1 学习目标</h3><ul><li>学习集成学习方法以及交叉验证情况下的模型集成</li><li>学会使用深度学习模型的集成学习</li></ul><h3 id="2-2-集成学习方法"><a href="#2-2-集成学习方法" class="headerlink" title="2.2 集成学习方法"></a>2.2 集成学习方法</h3><p>在机器学习中的集成学习可以在一定程度上提高预测精度，常见的集成学习方法有Stacking、Bagging和Boosting，同时这些集成学习方法与具体验证集划分联系紧密。</p><p>由于深度学习模型一般需要较长的训练周期，如果硬件设备不允许建议选取留出法，如果需要追求精度可以使用交叉验证的方法。</p><p>下面假设构建了10折交叉验证，训练得到10个CNN模型。<br><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task05/交叉验证.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task05/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81.png" srcset="/img/loading.gif" alt="IMG"></a></p><p>那么在10个CNN模型可以使用如下方式进行集成：</p><ul><li>对预测的结果的概率值进行平均，然后解码为具体字符；</li><li>对预测的字符进行投票，得到最终字符。</li></ul><h3 id="2-3-深度学习中的集成学习"><a href="#2-3-深度学习中的集成学习" class="headerlink" title="2.3 深度学习中的集成学习"></a>2.3 深度学习中的集成学习</h3><p>此外在深度学习中本身还有一些集成学习思路的做法，值得借鉴学习：</p><h4><a href="#" class="headerlink"></a></h4><h4 id="2-3-1-Dropout"><a href="#2-3-1-Dropout" class="headerlink" title="2.3.1 Dropout"></a>2.3.1 Dropout</h4><p>Dropout可以作为训练深度神经网络的一种技巧。在每个训练批次中，通过随机让一部分的节点停止工作。同时在预测的过程中让所有的节点都其作用。<br><a href="https://github.com/datawhalechina/team-learning/blob/master/03 计算机视觉/计算机视觉实践（街景字符编码识别）/IMG/Task05/Droopout.png" target="_blank" rel="noopener"><img src="https://github.com/datawhalechina/team-learning/raw/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89/IMG/Task05/Droopout.png" srcset="/img/loading.gif" alt="IMG"></a></p><p>Dropout经常出现在在先有的CNN网络中，可以有效的缓解模型过拟合的情况，也可以在预测时增加模型的精度。</p><p>加入Dropout后的网络结构如下：</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-comment"># 定义模型</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SVHN_Model1</span><span class="hljs-params">(nn.Module)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(SVHN_Model1, self).__init__()
+        <span class="hljs-comment"># CNN提取特征模块</span>
+        self.cnn = nn.Sequential(
+            nn.Conv2d(<span class="hljs-number">3</span>, <span class="hljs-number">16</span>, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), stride=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)),
+            nn.ReLU(),
+            nn.Dropout(<span class="hljs-number">0.25</span>),
+            nn.MaxPool2d(<span class="hljs-number">2</span>),
+            nn.Conv2d(<span class="hljs-number">16</span>, <span class="hljs-number">32</span>, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), stride=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)),
+            nn.ReLU(), 
+            nn.Dropout(<span class="hljs-number">0.25</span>),
+            nn.MaxPool2d(<span class="hljs-number">2</span>),
+        )
+        <span class="hljs-comment"># </span>
+        self.fc1 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+        self.fc2 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+        self.fc3 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+        self.fc4 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+        self.fc5 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+        self.fc6 = nn.Linear(<span class="hljs-number">32</span>*<span class="hljs-number">3</span>*<span class="hljs-number">7</span>, <span class="hljs-number">11</span>)
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, img)</span>:</span>        
+        feat = self.cnn(img)
+        feat = feat.view(feat.shape[<span class="hljs-number">0</span>], <span class="hljs-number">-1</span>)
+        c1 = self.fc1(feat)
+        c2 = self.fc2(feat)
+        c3 = self.fc3(feat)
+        c4 = self.fc4(feat)
+        c5 = self.fc5(feat)
+        c6 = self.fc6(feat)
+        <span class="hljs-keyword">return</span> c1, c2, c3, c4, c5, c6</code></pre></div><h4 id="2-3-2-TTA"><a href="#2-3-2-TTA" class="headerlink" title="2.3.2 TTA"></a>2.3.2 TTA</h4><p>测试集数据扩增（Test Time Augmentation，简称TTA）也是常用的集成学习技巧，数据扩增不仅可以在训练时候用，而且可以同样在预测时候进行数据扩增，对同一个样本预测三次，然后对三次结果进行平均。</p><script src="https://gist.github.com/anonymous12357/7d4743cebd30381bc9b8f3cae92afd3b.js"></script>]]></content>
   </entry>
   <entry>
     <title>非docker下安装rsshub</title>
