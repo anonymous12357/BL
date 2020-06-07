@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Largesse&#39;s blog</title>
+  <icon>https://largesse.12306.recipes/icon.png</icon>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://largesse.12306.recipes/"/>
+  <updated>2020-06-07T04:24:50.317Z</updated>
+  <id>https://largesse.12306.recipes/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo Fluid 主题教程</title>
+    <link href="https://largesse.12306.recipes/posts/306655cb.html"/>
+    <id>https://largesse.12306.recipes/posts/306655cb.html</id>
+    <published>2020-06-07T02:00:00.000Z</published>
+    <updated>2020-06-07T04:24:50.317Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-安装Hexo&quot;&gt;&lt;a href=&quot;#1-安装Hexo&quot; class=&quot;headerlink&quot; title=&quot;1 安装Hexo&quot;&gt;&lt;/a&gt;1 安装Hexo&lt;/h2&gt;&lt;h4 id=&quot;安装Node-js&quot;&gt;&lt;a href=&quot;#安装Node-js&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Hexo" scheme="https://largesse.12306.recipes/tags/Hexo/"/>
+    
+      <category term="Fluid" scheme="https://largesse.12306.recipes/tags/Fluid/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Iptables 常用命令,选项,参数及实例整理收集</title>
+    <link href="https://largesse.12306.recipes/posts/a040f7b3.html"/>
+    <id>https://largesse.12306.recipes/posts/a040f7b3.html</id>
+    <published>2020-06-05T15:25:07.501Z</published>
+    <updated>2020-06-05T15:26:49.983Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Iptables-常用命令-选项-参数及实例整理收集&quot;&gt;&lt;a href=&quot;#Iptables-常用命令-选项-参数及实例整理收集&quot; class=&quot;headerlink&quot; title=&quot;Iptables
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Telegram 的 CJK 字体设置</title>
+    <link href="https://largesse.12306.recipes/posts/437a2cee.html"/>
+    <id>https://largesse.12306.recipes/posts/437a2cee.html</id>
+    <published>2020-06-05T15:13:25.830Z</published>
+    <updated>2020-06-07T10:54:06.722Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;FontMod-是什么？&quot;&gt;&lt;a href=&quot;#FontMod-是什么？&quot; class=&quot;headerlink&quot; title=&quot;FontMod 是什么？&quot;&gt;&lt;/a&gt;FontMod 是什么？&lt;/h2&gt;&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Telegram" scheme="https://largesse.12306.recipes/categories/Telegram/"/>
+    
+    
+      <category term="Telegram" scheme="https://largesse.12306.recipes/tags/Telegram/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>五线谱 唱名 记录</title>
+    <link href="https://largesse.12306.recipes/posts/cc3cc25b.html"/>
+    <id>https://largesse.12306.recipes/posts/cc3cc25b.html</id>
+    <published>2020-06-04T11:35:59.057Z</published>
+    <updated>2020-06-04T14:34:17.504Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;div
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>快速删除 Google Drive 所有文件</title>
+    <link href="https://largesse.12306.recipes/posts/5b5c96e4.html"/>
+    <id>https://largesse.12306.recipes/posts/5b5c96e4.html</id>
+    <published>2020-06-03T11:04:33.297Z</published>
+    <updated>2020-06-07T11:06:56.320Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;Google drive根目录下存在大量文件（数万同类型文件），手动删除极其耗时，同时连接Google
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Google Drive" scheme="https://largesse.12306.recipes/categories/Google-Drive/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>零基础入门CV - Task5 模型集成</title>
+    <link href="https://largesse.12306.recipes/posts/1e52eb39.html"/>
+    <id>https://largesse.12306.recipes/posts/1e52eb39.html</id>
+    <published>2020-06-01T09:24:11.322Z</published>
+    <updated>2020-06-03T12:13:54.272Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1-1-学习目标&quot;&gt;&lt;a href=&quot;#1-1-学习目标&quot; class=&quot;headerlink&quot; title=&quot;1.1 学习目标&quot;&gt;&lt;/a&gt;1.1
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>零基础入门CV - Task4 模型训练与验证</title>
+    <link href="https://largesse.12306.recipes/posts/8a2bae63.html"/>
+    <id>https://largesse.12306.recipes/posts/8a2bae63.html</id>
+    <published>2020-05-30T10:28:17.283Z</published>
+    <updated>2020-06-03T12:13:54.270Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一个成熟合格的深度学习训练流程至少具备以下功能：&lt;/p&gt;&lt;ul&gt;&lt;li&gt;在训练集上进行训练，并在验证集上进行验证；&lt;/li&gt;&lt;li&gt;模型可以保存最优的权重，并读取权重；&lt;/li&gt;&lt;li&gt;记录下训练集和验证集的精度，便于调参。&lt;/li&gt;&lt;/ul&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>零基础入门CV - Task3 字符识别模型</title>
+    <link href="https://largesse.12306.recipes/posts/4b02d627.html"/>
+    <id>https://largesse.12306.recipes/posts/4b02d627.html</id>
+    <published>2020-05-26T08:57:19.090Z</published>
+    <updated>2020-06-03T12:13:54.267Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;学习目标&quot;&gt;&lt;a href=&quot;#学习目标&quot; class=&quot;headerlink&quot; title=&quot;学习目标&quot;&gt;&lt;/a&gt;学习目标&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;学习CNN基础和原理&lt;/li&gt;&lt;li&gt;使用Pytorch框架构建CNN模型，并完成训练&lt;/li&gt;&lt;/ul&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>零基础入门CV - Task2 数据读取与数据扩增</title>
+    <link href="https://largesse.12306.recipes/posts/f7421d0b.html"/>
+    <id>https://largesse.12306.recipes/posts/f7421d0b.html</id>
+    <published>2020-05-23T13:27:37.566Z</published>
+    <updated>2020-06-03T12:13:54.268Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1-解题思路&quot;&gt;&lt;a href=&quot;#1-解题思路&quot; class=&quot;headerlink&quot; title=&quot;1 解题思路&quot;&gt;&lt;/a&gt;1 解题思路&lt;/h3&gt;&lt;p&gt;读取数据、构建模型、预训练模型、验证模型：&lt;/p&gt;&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>零基础入门CV task1</title>
+    <link href="https://largesse.12306.recipes/posts/ab419b1c.html"/>
+    <id>https://largesse.12306.recipes/posts/ab419b1c.html</id>
+    <published>2020-05-20T07:43:42.161Z</published>
+    <updated>2020-06-03T12:13:54.273Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;比赛地址：&lt;a href=&quot;https://tianchi.aliyun.com/competition/entrance/531795/introduction&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Windows下安装npm</title>
+    <link href="https://largesse.12306.recipes/posts/bb9bd797.html"/>
+    <id>https://largesse.12306.recipes/posts/bb9bd797.html</id>
+    <published>2020-05-18T10:29:59.153Z</published>
+    <updated>2020-06-03T12:13:54.249Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Windows下安装npm&quot;&gt;&lt;a href=&quot;#Windows下安装npm&quot; class=&quot;headerlink&quot; title=&quot;Windows下安装npm&quot;&gt;&lt;/a&gt;Windows下安装npm&lt;/h2&gt;&lt;h3 id=&quot;安装npm&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>brook快速搭建socks5代理</title>
+    <link href="https://largesse.12306.recipes/posts/5761edb4.html"/>
+    <id>https://largesse.12306.recipes/posts/5761edb4.html</id>
+    <published>2020-04-22T00:49:53.511Z</published>
+    <updated>2020-06-03T12:13:54.251Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;brook快速搭建socks5代理&quot;&gt;&lt;a href=&quot;#brook快速搭建socks5代理&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>安装Shadowsocks-libev v2ray-plugin</title>
+    <link href="https://largesse.12306.recipes/posts/9685df88.html"/>
+    <id>https://largesse.12306.recipes/posts/9685df88.html</id>
+    <published>2020-04-21T15:51:19.082Z</published>
+    <updated>2020-06-03T12:13:54.260Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;安装Shadowsocks-libev、Nginx、acme-sh-SSL认证-使用-v2ray-plugin-协议&quot;&gt;&lt;a href=&quot;#安装Shadowsocks-libev、Nginx、acme-sh-SSL认证-使用-v2ray-plugin-协议&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>udp2raw 命令行</title>
+    <link href="https://largesse.12306.recipes/posts/77b962c.html"/>
+    <id>https://largesse.12306.recipes/posts/77b962c.html</id>
+    <published>2020-03-22T13:47:07.714Z</published>
+    <updated>2020-06-03T12:13:54.254Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;div class=&quot;hljs&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs angelscript&quot;&gt;./udp2raw_amd64 -s -l0&lt;span class=&quot;hljs-number&quot;&gt;.0&lt;/span&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Termux 使用教程</title>
+    <link href="https://largesse.12306.recipes/posts/3909ede9.html"/>
+    <id>https://largesse.12306.recipes/posts/3909ede9.html</id>
+    <published>2020-03-15T13:12:12.454Z</published>
+    <updated>2020-06-03T12:13:54.246Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Termux-使用教程&quot;&gt;&lt;a href=&quot;#Termux-使用教程&quot; class=&quot;headerlink&quot; title=&quot;Termux 使用教程&quot;&gt;&lt;/a&gt;Termux 使用教程&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</title>
+    <link href="https://largesse.12306.recipes/posts/d8b5d3fc.html"/>
+    <id>https://largesse.12306.recipes/posts/d8b5d3fc.html</id>
+    <published>2020-03-15T10:21:27.686Z</published>
+    <updated>2020-06-03T12:13:54.255Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程&quot;&gt;&lt;a href=&quot;#修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程&quot; class=&quot;headerlink&quot; title=&quot;修改win10
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Fail2Ban 禁止服务器上的非法访问</title>
+    <link href="https://largesse.12306.recipes/posts/f3bca7b5.html"/>
+    <id>https://largesse.12306.recipes/posts/f3bca7b5.html</id>
+    <published>2020-03-15T10:05:15.781Z</published>
+    <updated>2020-06-03T12:13:54.244Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Linux 管理员的一个重要任务是保护服务器免受非法攻击或访问。 默认情况下，Linux 系统带有配置良好的防火墙，比如iptables、Uncomplicated Firewall（UFW），ConfigServer Security
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>besttrace回程测速方法</title>
+    <link href="https://largesse.12306.recipes/posts/c863342b.html"/>
+    <id>https://largesse.12306.recipes/posts/c863342b.html</id>
+    <published>2020-03-14T03:44:35.099Z</published>
+    <updated>2020-06-03T12:13:54.252Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Best Trace 是 &lt;a href=&quot;https://www.24kplus.com/go/ipip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;IPIP&lt;/a&gt; 推出的一款路由追踪器，目前有
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>AutoRclone配合gclone突破GoogleTeamDrive750G流量限制</title>
+    <link href="https://largesse.12306.recipes/posts/e5e17474.html"/>
+    <id>https://largesse.12306.recipes/posts/e5e17474.html</id>
+    <published>2020-03-13T15:39:52.824Z</published>
+    <updated>2020-06-03T12:13:54.241Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;参考：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.uud.me/qiwenzalun/autorclone-gclone.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>建立google driver在线目录goindex</title>
+    <link href="https://largesse.12306.recipes/posts/e222848c.html"/>
+    <id>https://largesse.12306.recipes/posts/e222848c.html</id>
+    <published>2020-03-13T12:36:00.465Z</published>
+    <updated>2020-06-03T12:13:54.263Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;建立-GoIndex-无服务器架构-Google-Drive-目录索引和Cloudflare-自定义ip加速访问&quot;&gt;&lt;a href=&quot;#建立-GoIndex-无服务器架构-Google-Drive-目录索引和Cloudflare-自定义ip加速访问&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
