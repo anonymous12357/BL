@@ -350,79 +350,6 @@ hexo <span class="hljs-keyword">generate</span>
 hexo deploy</code></pre><p>然后写完blog后，cmd 运行 <code>bash deploy.sh</code></p>]]></content>
   </entry>
   <entry>
-    <title>Telegram 的 CJK 字体设置</title>
-    <url>/posts/437a2cee.html</url>
-    <content><![CDATA[<h2 id="FontMod-是什么？"><a href="#FontMod-是什么？" class="headerlink" title="FontMod 是什么？"></a>FontMod 是什么？</h2><p><a href="https://github.com/ysc3839/FontMod" target="_blank" rel="noopener">ysc3839/FontMod</a> 是由 <a href="https://blog.ysc3839.com/" target="_blank" rel="noopener">@ysc3839</a> 开发的一个小玩意，可以注入一些 Win32 程序（主要是 Telegram）用以替换掉默认的字体 fallback。通过把原本的 <code>SimSun</code> 替换为微软雅黑，Telegram 的观感一下子提升了不少，对于使用界面缩放的用户也有用。</p><p>在这个 Telegram 版本更新以前，喜欢折腾和讨厌难看宋体的用户就是用它来改善 Telegram 的中文观感。FontMod 默认配置使用起来也很简单，下载后放入 Telegram Desktop 目录，把 dll 改名为 <code>winmm.dll</code> 就可以了。</p><p>此时，字体规则和刚才所述一致，宋体被替换为微软雅黑等。也就是说，如果你更新到了 Telegram Desktop 2.6.1 版本，且你对于现在的字体感到满意，你可以拿走 FontMod 也不影响字体显示了。</p><h2 id="用什么字体呢？"><a href="#用什么字体呢？" class="headerlink" title="用什么字体呢？"></a>用什么字体呢？</h2><p>微软雅黑在代码编辑器 / shell 里用都很合适，也是我测试比较了之后个人认为用在 Telegram 上效果也很好的一款字体。</p><h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><p>这是我的 <code>FontMod.yaml</code> 配置。</p><pre><code class="hljs yaml"><span class="hljs-comment"># tg 2.1.6</span>
-<span class="hljs-comment"># FontMod 2.0.0.0</span>
-<span class="hljs-comment"># 多 style 配置，增加灵活性</span>
-
-<span class="hljs-comment"># 聊天、设置(未加粗)、对话的最后一条消息、任务栏未读消息计数</span>
-<span class="hljs-attr">style1:</span> <span class="hljs-meta">&amp;style1</span>
-  <span class="hljs-attr">size:</span> <span class="hljs-number">20</span>
-  <span class="hljs-comment"># weight: 400</span>
-
-<span class="hljs-comment"># 输入时格式化成斜体</span>
-<span class="hljs-attr">style2:</span> <span class="hljs-meta">&amp;style2</span>
-  <span class="hljs-attr">size:</span> <span class="hljs-number">20</span>
-  <span class="hljs-comment"># weight: 400</span>
-
-<span class="hljs-comment"># UI 中加粗显示的字体、如：列表中好友、群、频道名称；文件夹分类启用后的字体等</span>
-<span class="hljs-attr">style3:</span> <span class="hljs-meta">&amp;style3</span>
-  <span class="hljs-attr">size:</span> <span class="hljs-number">19</span>
-  <span class="hljs-comment"># weight: 600</span>
-
-<span class="hljs-attr">fonts:</span>
-
-<span class="hljs-comment"># style1</span>
-<span class="hljs-comment"># 聊天、设置、最后一条消息、任务栏未读消息</span>
-  <span class="hljs-attr">DAOpenSansRegular:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
-    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
-    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
-    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style1</span>
-
-<span class="hljs-comment"># style2</span>
-<span class="hljs-comment"># 输入时格式化成斜体</span>
-  <span class="hljs-attr">DAOpenSansRegularItalic:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
-    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
-    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
-    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style2</span>
-
-<span class="hljs-comment"># style3</span>
-<span class="hljs-comment">#  UI 中加粗显示的字体、如：列表中好友、群、频道名称；文件夹分类启用后的字体等</span>
-  <span class="hljs-attr">DAOpenSansSemibold:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
-    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
-    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
-    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style3</span>
-
-<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
-  <span class="hljs-comment"># DAVazirRegular: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
-  <span class="hljs-comment">#   replace: Sarasa Mono SC</span>
-  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
-  <span class="hljs-comment">#   &lt;&lt;: *style</span>
-
-<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
-  <span class="hljs-comment"># DAVazirMedium: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
-  <span class="hljs-comment">#   replace: STCaiyun</span>
-  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
-  <span class="hljs-comment">#   &lt;&lt;: *style</span>
-
-<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
-  <span class="hljs-comment"># DAOpenSansSemiboldItalic: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
-  <span class="hljs-comment">#   replace: Sarasa Mono SC</span>
-  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
-  <span class="hljs-comment">#   &lt;&lt;: *style</span>
-
-<span class="hljs-attr">fixGSOFont:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># true is to use system UI font</span>
-<span class="hljs-comment">#fixGSOFont: *zh-cn-font # Or replace with user defined font</span>
-<span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span></code></pre><h3 id="微软雅黑"><a href="#微软雅黑" class="headerlink" title="微软雅黑"></a>微软雅黑</h3><p>如果不考虑等距字体的问题，微软雅黑本身也是支持粗体的。那么，我也可以通过修改 FontMod 来提供中文的粗体支持。只是，我测试了一下，微软雅黑的粗体表现在 Telegram 的字号下简直惨不忍睹：</p><p><a href="https://ikevin.in/images/008/100-MSYHB.png" target="_blank" rel="noopener"><img src="https://ikevin.in/images/008/100-MSYHB.png" srcset="/img/loading.gif" alt="100% 缩放，微软雅黑粗体"></a></p><p>100% 缩放，微软雅黑粗体</p><p>这已经可以说是粗得不成样子了，糊到一片很难看。</p><p>另外，图上还有一个严重的问题：<strong>微软雅黑没有韩文的覆盖</strong>（至少我的参测版本 Windows 1909 字体 v6.25 没有），韩文实际上 fallback 到了另外一个字体，显示效果炸裂。</p><h3 id="思源黑体"><a href="#思源黑体" class="headerlink" title="思源黑体"></a>思源黑体</h3><p>那么，同样是 CJK 字体且名声在外的思源黑体呢？思源黑体同样有等宽家族，可以全部解决问题。但是我的测试结论是：如果你有界面缩放，那么还可以用；如果没有，即 100%，那还是算了吧。看图：</p><p><a href="https://ikevin.in/images/008/100-SHSM.png" target="_blank" rel="noopener"><img src="https://ikevin.in/images/008/100-SHSM.png" srcset="/img/loading.gif" alt="100% 缩放，思源黑体 Medium"></a></p><p>100% 缩放，思源黑体 Medium</p><p>可以看到 100% 缩放时字体很「虚」，笔画已经模糊不清，严重影响了观感。</p><p>这样一对比，高下自判。</p><p>但是，说到底，建议买块更好的屏幕（4K + 200% 缩放真香！）。</p>]]></content>
-      <categories>
-        <category>Telegram</category>
-      </categories>
-      <tags>
-        <tag>Telegram</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Iptables 常用命令,选项,参数及实例整理收集</title>
     <url>/posts/a040f7b3.html</url>
     <content><![CDATA[<h1 id="Iptables-常用命令-选项-参数及实例整理收集"><a href="#Iptables-常用命令-选项-参数及实例整理收集" class="headerlink" title="Iptables 常用命令,选项,参数及实例整理收集"></a>Iptables 常用命令,选项,参数及实例整理收集</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文整理收集了 iptables 的常用命令,参数,选项及实例以备不时之需.</p><p>iptables 是运行在使用者空间的应用软体,通过控制 Linux 内核 netfilter 模组,来管理网路封包的处理和转发.目前 iptables 已内置在各 Linux 发行版中.本文将收集整理其命令,选项,参数及实例以备不时之需.</p><p>本文转载于<a href="https://wangchujiang.com/linux-command/c/iptables.html" target="_blank" rel="noopener"> 原文 </a>,经测试,整理发布.如需转载请联系<strong>原作者</strong>获得授权,并注明转载地址.</p><hr><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="查询当前防火墙状态"><a href="#查询当前防火墙状态" class="headerlink" title="查询当前防火墙状态"></a>查询当前防火墙状态</h3><pre><code class="hljs shell">systemctl status iptables
@@ -570,6 +497,79 @@ Enter <span class="hljs-keyword">a</span> <span class="hljs-built_in">number</sp
 └── termux.properties</code></pre><p>Bash</p><pre><code class="hljs bash">ZSH_THEME=<span class="hljs-string">"random"</span></code></pre><h2 id="管理员身份"><a href="#管理员身份" class="headerlink" title="管理员身份"></a>管理员身份</h2><h3 id="手机没有root"><a href="#手机没有root" class="headerlink" title="手机没有root"></a>手机没有root</h3><p>利用<code>proot</code>工具来模拟某些需要root的环境</p><p>Bash</p><pre><code class="hljs bash">pkg install proot</code></pre><p>然后终端下面输入:</p><pre><code class="hljs ebnf"><span class="hljs-attribute">termux-chroot</span></code></pre><p>即可模拟<code>root</code>环境<br>在这个<code>proot</code>环境下面,相当于是进入了<code>home</code>目录,可以很方便地进行一些配置.</p><p><img src="https://image.3001.net/images/20180502/15252406356840.png" srcset="/img/loading.gif" alt="img"></p><p>在管理员身份下，输入<code>exit</code>可回到普通用户身份。</p><h3 id="手机已经root"><a href="#手机已经root" class="headerlink" title="手机已经root"></a>手机已经root</h3><p>安装<code>tsu</code>,这是一个<code>su</code>的termux版本,用来在termux上替代<code>su</code>:</p><p>Bash</p><pre><code class="hljs bash">pkg install tsu</code></pre><p>然后终端下面输入:</p><pre><code class="hljs ebnf"><span class="hljs-attribute">tsu</span></code></pre><p>即可切换<code>root</code>用户,这个时候会弹出<code>root</code>授权提示,给予其<code>root</code>权限,效果图如下:</p><p><img src="https://image.3001.net/images/20180501/15251567018423.png" srcset="/img/loading.gif" alt="img"></p><p>在管理员身份下，输入<code>exit</code>可回到普通用户身份。</p>]]></content>
   </entry>
   <entry>
+    <title>Telegram 的 CJK 字体设置</title>
+    <url>/posts/437a2cee.html</url>
+    <content><![CDATA[<h2 id="FontMod-是什么？"><a href="#FontMod-是什么？" class="headerlink" title="FontMod 是什么？"></a>FontMod 是什么？</h2><p><a href="https://github.com/ysc3839/FontMod" target="_blank" rel="noopener">ysc3839/FontMod</a> 是由 <a href="https://blog.ysc3839.com/" target="_blank" rel="noopener">@ysc3839</a> 开发的一个小玩意，可以注入一些 Win32 程序（主要是 Telegram）用以替换掉默认的字体 fallback。通过把原本的 <code>SimSun</code> 替换为微软雅黑，Telegram 的观感一下子提升了不少，对于使用界面缩放的用户也有用。</p><p>在这个 Telegram 版本更新以前，喜欢折腾和讨厌难看宋体的用户就是用它来改善 Telegram 的中文观感。FontMod 默认配置使用起来也很简单，下载后放入 Telegram Desktop 目录，把 dll 改名为 <code>winmm.dll</code> 就可以了。</p><p>此时，字体规则和刚才所述一致，宋体被替换为微软雅黑等。也就是说，如果你更新到了 Telegram Desktop 2.6.1 版本，且你对于现在的字体感到满意，你可以拿走 FontMod 也不影响字体显示了。</p><h2 id="用什么字体呢？"><a href="#用什么字体呢？" class="headerlink" title="用什么字体呢？"></a>用什么字体呢？</h2><p>微软雅黑在代码编辑器 / shell 里用都很合适，也是我测试比较了之后个人认为用在 Telegram 上效果也很好的一款字体。</p><h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><p>这是我的 <code>FontMod.yaml</code> 配置。</p><pre><code class="hljs yaml"><span class="hljs-comment"># tg 2.1.6</span>
+<span class="hljs-comment"># FontMod 2.0.0.0</span>
+<span class="hljs-comment"># 多 style 配置，增加灵活性</span>
+
+<span class="hljs-comment"># 聊天、设置(未加粗)、对话的最后一条消息、任务栏未读消息计数</span>
+<span class="hljs-attr">style1:</span> <span class="hljs-meta">&amp;style1</span>
+  <span class="hljs-attr">size:</span> <span class="hljs-number">20</span>
+  <span class="hljs-comment"># weight: 400</span>
+
+<span class="hljs-comment"># 输入时格式化成斜体</span>
+<span class="hljs-attr">style2:</span> <span class="hljs-meta">&amp;style2</span>
+  <span class="hljs-attr">size:</span> <span class="hljs-number">20</span>
+  <span class="hljs-comment"># weight: 400</span>
+
+<span class="hljs-comment"># UI 中加粗显示的字体、如：列表中好友、群、频道名称；文件夹分类启用后的字体等</span>
+<span class="hljs-attr">style3:</span> <span class="hljs-meta">&amp;style3</span>
+  <span class="hljs-attr">size:</span> <span class="hljs-number">19</span>
+  <span class="hljs-comment"># weight: 600</span>
+
+<span class="hljs-attr">fonts:</span>
+
+<span class="hljs-comment"># style1</span>
+<span class="hljs-comment"># 聊天、设置、最后一条消息、任务栏未读消息</span>
+  <span class="hljs-attr">DAOpenSansRegular:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
+    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
+    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
+    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style1</span>
+
+<span class="hljs-comment"># style2</span>
+<span class="hljs-comment"># 输入时格式化成斜体</span>
+  <span class="hljs-attr">DAOpenSansRegularItalic:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
+    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
+    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
+    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style2</span>
+
+<span class="hljs-comment"># style3</span>
+<span class="hljs-comment">#  UI 中加粗显示的字体、如：列表中好友、群、频道名称；文件夹分类启用后的字体等</span>
+  <span class="hljs-attr">DAOpenSansSemibold:</span> <span class="hljs-string">&amp;zh-cn-font</span> <span class="hljs-comment"># Chinese (Simplified) fallback font</span>
+    <span class="hljs-comment"># replace: PingFangSC-Regular</span>
+    <span class="hljs-attr">replace:</span> <span class="hljs-string">Microsoft</span> <span class="hljs-string">YaHei</span>
+    <span class="hljs-string">&lt;&lt;:</span> <span class="hljs-meta">*style3</span>
+
+<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
+  <span class="hljs-comment"># DAVazirRegular: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
+  <span class="hljs-comment">#   replace: Sarasa Mono SC</span>
+  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
+  <span class="hljs-comment">#   &lt;&lt;: *style</span>
+
+<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
+  <span class="hljs-comment"># DAVazirMedium: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
+  <span class="hljs-comment">#   replace: STCaiyun</span>
+  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
+  <span class="hljs-comment">#   &lt;&lt;: *style</span>
+
+<span class="hljs-comment"># 不知道是 UI 哪些部位的字体</span>
+  <span class="hljs-comment"># DAOpenSansSemiboldItalic: &amp;zh-cn-font # Chinese (Simplified) fallback font</span>
+  <span class="hljs-comment">#   replace: Sarasa Mono SC</span>
+  <span class="hljs-comment">#   # replace: Source Han Sans CN</span>
+  <span class="hljs-comment">#   &lt;&lt;: *style</span>
+
+<span class="hljs-attr">fixGSOFont:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># true is to use system UI font</span>
+<span class="hljs-comment">#fixGSOFont: *zh-cn-font # Or replace with user defined font</span>
+<span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span></code></pre><h3 id="微软雅黑"><a href="#微软雅黑" class="headerlink" title="微软雅黑"></a>微软雅黑</h3><p>如果不考虑等距字体的问题，微软雅黑本身也是支持粗体的。那么，我也可以通过修改 FontMod 来提供中文的粗体支持。只是，我测试了一下，微软雅黑的粗体表现在 Telegram 的字号下简直惨不忍睹：</p><p><a href="https://ikevin.in/images/008/100-MSYHB.png" target="_blank" rel="noopener"><img src="https://ikevin.in/images/008/100-MSYHB.png" srcset="/img/loading.gif" alt="100% 缩放，微软雅黑粗体"></a></p><p>100% 缩放，微软雅黑粗体</p><p>这已经可以说是粗得不成样子了，糊到一片很难看。</p><p>另外，图上还有一个严重的问题：<strong>微软雅黑没有韩文的覆盖</strong>（至少我的参测版本 Windows 1909 字体 v6.25 没有），韩文实际上 fallback 到了另外一个字体，显示效果炸裂。</p><h3 id="思源黑体"><a href="#思源黑体" class="headerlink" title="思源黑体"></a>思源黑体</h3><p>那么，同样是 CJK 字体且名声在外的思源黑体呢？思源黑体同样有等宽家族，可以全部解决问题。但是我的测试结论是：如果你有界面缩放，那么还可以用；如果没有，即 100%，那还是算了吧。看图：</p><p><a href="https://ikevin.in/images/008/100-SHSM.png" target="_blank" rel="noopener"><img src="https://ikevin.in/images/008/100-SHSM.png" srcset="/img/loading.gif" alt="100% 缩放，思源黑体 Medium"></a></p><p>100% 缩放，思源黑体 Medium</p><p>可以看到 100% 缩放时字体很「虚」，笔画已经模糊不清，严重影响了观感。</p><p>这样一对比，高下自判。</p><p>但是，说到底，建议买块更好的屏幕（4K + 200% 缩放真香！）。</p>]]></content>
+      <categories>
+        <category>Telegram</category>
+      </categories>
+      <tags>
+        <tag>Telegram</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows下安装npm</title>
     <url>/posts/bb9bd797.html</url>
     <content><![CDATA[<h2 id="Windows下安装npm"><a href="#Windows下安装npm" class="headerlink" title="Windows下安装npm"></a>Windows下安装npm</h2><h3 id="安装npm"><a href="#安装npm" class="headerlink" title="安装npm"></a>安装npm</h3><ol><li><p>在cmd里输入node -v，若能出现版本号，则表示已经安装，若不能，需要到官网下载安装 （<a href="https://nodejs.org/zh-cn/）" target="_blank" rel="noopener">https://nodejs.org/zh-cn/）</a></p></li><li><p>首先配置npm的全局模块的存放路径、cache的路径，此处我选择放在：<strong>D:\Program Files\nodejs</strong><br>运行<strong>DOS</strong>，输入：</p><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span><span class="hljs-built_in"> prefix </span><span class="hljs-string">"D:\Program Files\nodejs\node_global"</span>
@@ -629,15 +629,6 @@ traceroute to <span class="hljs-number">183.56</span><span class="hljs-number">.
 设置等待探测响应的时间（以秒为单位）。 （默认<span class="hljs-number">3</span>）</code></pre>]]></content>
   </entry>
   <entry>
-    <title>speedtest回程测速方法</title>
-    <url>/posts/17de76dc.html</url>
-    <content><![CDATA[<pre><code class="hljs avrasm">wget -O speedtest-<span class="hljs-keyword">cli</span> https://raw.githubusercontent.com/sivel/speedtest-<span class="hljs-keyword">cli</span>/master/speedtest.py
-
-chmod +<span class="hljs-built_in">x</span> speedtest-<span class="hljs-keyword">cli</span></code></pre><pre><code class="hljs avrasm">./speedtest-<span class="hljs-keyword">cli</span></code></pre><p>如果想看一下所有 speedtest.net 可用的服务器，可以使用以下命令</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--list</span></code></pre><p>可以通过”grep”命令进行筛选，例如查看位于北京的节点</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--list</span> | grep <span class="hljs-params">(city)</span></code></pre><p>知道了测试节点信息后，就可以指定节点进行测速了</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--server</span> <span class="hljs-params">(numbers)</span> <span class="hljs-params">--byte</span>
-
-<span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--server</span> <span class="hljs-params">(numbers)</span> <span class="hljs-params">--byte</span> <span class="hljs-params">--no-upload</span> <span class="hljs-params">--single</span></code></pre><p>就是使用”–help”参数，查看 speedtest-cli 的详细参数信息，有兴趣的话可以自行测试每个参数的作用，这里就不再做过多讲解。</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--help</span></code></pre>]]></content>
-  </entry>
-  <entry>
     <title>brook快速搭建socks5代理</title>
     <url>/posts/5761edb4.html</url>
     <content><![CDATA[<h3 id="brook快速搭建socks5代理"><a href="#brook快速搭建socks5代理" class="headerlink" title="brook快速搭建socks5代理"></a>brook快速搭建socks5代理</h3><p>安装brook：</p><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/txthinking/</span>brook<span class="hljs-regexp">/releases/</span>download<span class="hljs-regexp">/v20200201/</span>brook
@@ -660,6 +651,15 @@ WantedBy=multi-user.target</code></pre><pre><code class="hljs css"><span class="
 <span class="hljs-selector-tag">systemctl</span> <span class="hljs-selector-tag">status</span> <span class="hljs-selector-tag">socks5</span><span class="hljs-selector-class">.service</span></code></pre>]]></content>
   </entry>
   <entry>
+    <title>speedtest回程测速方法</title>
+    <url>/posts/17de76dc.html</url>
+    <content><![CDATA[<pre><code class="hljs avrasm">wget -O speedtest-<span class="hljs-keyword">cli</span> https://raw.githubusercontent.com/sivel/speedtest-<span class="hljs-keyword">cli</span>/master/speedtest.py
+
+chmod +<span class="hljs-built_in">x</span> speedtest-<span class="hljs-keyword">cli</span></code></pre><pre><code class="hljs avrasm">./speedtest-<span class="hljs-keyword">cli</span></code></pre><p>如果想看一下所有 speedtest.net 可用的服务器，可以使用以下命令</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--list</span></code></pre><p>可以通过”grep”命令进行筛选，例如查看位于北京的节点</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--list</span> | grep <span class="hljs-params">(city)</span></code></pre><p>知道了测试节点信息后，就可以指定节点进行测速了</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--server</span> <span class="hljs-params">(numbers)</span> <span class="hljs-params">--byte</span>
+
+<span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--server</span> <span class="hljs-params">(numbers)</span> <span class="hljs-params">--byte</span> <span class="hljs-params">--no-upload</span> <span class="hljs-params">--single</span></code></pre><p>就是使用”–help”参数，查看 speedtest-cli 的详细参数信息，有兴趣的话可以自行测试每个参数的作用，这里就不再做过多讲解。</p><pre><code class="hljs jboss-cli"><span class="hljs-string">./speedtest-cli</span> <span class="hljs-params">--help</span></code></pre>]]></content>
+  </entry>
+  <entry>
     <title>udp2raw 命令行</title>
     <url>/posts/77b962c.html</url>
     <content><![CDATA[<pre><code class="hljs angelscript">./udp2raw_amd64 -s -l0<span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8220</span> -r <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">29900</span> -k <span class="hljs-string">"passwd"</span> --raw-mode faketcp --cipher-mode none --auth-mode none -a
@@ -676,6 +676,11 @@ WantedBy=multi-user.target</code></pre><pre><code class="hljs css"><span class="
     <title>修改 RSSHUB docker 网址</title>
     <url>/posts/fcc6fb2f.html</url>
     <content><![CDATA[<h6 id="1-通过两种方式查看-container-id-的ENV中关于URL的值，"><a href="#1-通过两种方式查看-container-id-的ENV中关于URL的值，" class="headerlink" title="1.通过两种方式查看[container-id]的ENV中关于URL的值，"></a>1.通过两种方式查看[container-id]的ENV中关于URL的值，</h6><pre><code class="hljs mel">docker <span class="hljs-keyword">exec</span> -it [<span class="hljs-keyword">container</span>-id] <span class="hljs-keyword">env</span></code></pre><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> inspect<span class="hljs-meta"> [container-id]</span></code></pre><p>查看[container-id]可通过</p><pre><code class="hljs ebnf"><span class="hljs-attribute">docker ps</span></code></pre><h6 id="2-首先关闭docker，service-docker-stop，修改-var-lib-docker-containers-container-id-config-v2-json里对应的环境变量URL，service-docker-start。"><a href="#2-首先关闭docker，service-docker-stop，修改-var-lib-docker-containers-container-id-config-v2-json里对应的环境变量URL，service-docker-start。" class="headerlink" title="2.首先关闭docker，service docker stop，修改/var/lib/docker/containers/[container-id]/config.v2.json里对应的环境变量URL，service docker start。"></a>2.首先关闭docker，<code>service docker stop</code>，修改<code>/var/lib/docker/containers/[container-id]/config.v2.json</code>里对应的环境变量URL，<code>service docker start</code>。</h6><h6 id="3-修改nginx，certbot-certonly-standalone-d-rss-example-com注册新地址。nano-etc-nginx-conf-d-ttrss-conf，将对应以前网址全部更换，包括-etc-letsencrypt-live-后面地址。然后使用-nginx-t-查看有无错误，没有错误后使用-nginx-s-reload-重启-Nginx-服务。"><a href="#3-修改nginx，certbot-certonly-standalone-d-rss-example-com注册新地址。nano-etc-nginx-conf-d-ttrss-conf，将对应以前网址全部更换，包括-etc-letsencrypt-live-后面地址。然后使用-nginx-t-查看有无错误，没有错误后使用-nginx-s-reload-重启-Nginx-服务。" class="headerlink" title="3.修改nginx，certbot certonly --standalone -d rss.example.com注册新地址。nano  /etc/nginx/conf.d/ttrss.conf，将对应以前网址全部更换，包括/etc/letsencrypt/live/后面地址。然后使用 nginx -t 查看有无错误，没有错误后使用 nginx -s reload 重启 Nginx 服务。"></a>3.修改nginx，<code>certbot certonly --standalone -d rss.example.com</code>注册新地址。<code>nano /etc/nginx/conf.d/ttrss.conf</code>，将对应以前网址全部更换，包括<code>/etc/letsencrypt/live/</code>后面地址。然后使用 <code>nginx -t</code> 查看有无错误，没有错误后使用 <code>nginx -s reload</code> 重启 Nginx 服务。</h6><h6 id="4-查看-Docker-内所有容器的-IP，更换ttrss内插件IP地址"><a href="#4-查看-Docker-内所有容器的-IP，更换ttrss内插件IP地址" class="headerlink" title="4.查看 Docker 内所有容器的 IP，更换ttrss内插件IP地址"></a>4.查看 Docker 内所有容器的 IP，更换ttrss内插件IP地址</h6><pre><code class="hljs reasonml">docker inspect --format='&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;<span class="hljs-keyword">end</span>&#125;&#125;' <span class="hljs-constructor">$(<span class="hljs-params">docker</span> <span class="hljs-params">ps</span> -<span class="hljs-params">aq</span>)</span></code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</title>
+    <url>/posts/d8b5d3fc.html</url>
+    <content><![CDATA[<h2 id="修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程"><a href="#修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程" class="headerlink" title="修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程"></a>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</h2><p>先去下载<a href="https://www.speedguide.net/downloads.php" target="_blank" rel="noopener"><strong>SG TCP Optimizer</strong></a>使用默认设置优化win10.</p><h3 id="1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前-TCP-全局参数"><a href="#1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前-TCP-全局参数" class="headerlink" title="1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前 TCP 全局参数"></a>1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前 TCP 全局参数</h3><p><code>netsh int tcp show global</code><br><img src="https://tva1.sinaimg.cn/large/007X8olVly1g6nwztaehoj30ek08oq36.jpg" srcset="/img/loading.gif" alt="img"></p><h3 id="2、修改TCP-全局参数。以下4个都要改"><a href="#2、修改TCP-全局参数。以下4个都要改" class="headerlink" title="2、修改TCP 全局参数。以下4个都要改"></a>2、修改TCP 全局参数。以下4个都要改</h3><p><strong>2.1直接缓存访问(DCA)</strong><code>netsh int tcp set global dca=enabled</code></p><p><strong>2.2接收窗口自动调谐级别</strong><code>netsh int tcp set global autotuninglevel=normal</code></p><p><strong>2.3附加拥塞控制提供程序</strong></p><p>Win7用此命令<code>netsh interface tcp set global congestionprovider=ctcp</code><br>Win10用此命令 <code>netsh int tcp set supplemental template=internet congestionprovider=ctcp</code><br><strong>2.4RFC 1323 时间戳</strong><code>netsh int tcp set global timestamps=enabled</code></p><p><img src="https://tva1.sinaimg.cn/large/007X8olVly1g6nx29ro56j30j305p3yk.jpg" srcset="/img/loading.gif" alt="img"></p><p>3、重启电脑</p>]]></content>
   </entry>
   <entry>
     <title>安装 shadowsocks-libev + kcptun + 锐速 教程</title>
@@ -706,11 +711,6 @@ wget -N <span class="hljs-params">--no-check-certificate</span> <span class="hlj
 <span class="hljs-keyword">sh</span> kcptun.<span class="hljs-keyword">sh</span></code></pre><p>kcptun可以选择不加密，其他参数可参考<a href="https://github.com/xtaci/kcptun" target="_blank" rel="noopener">https://github.com/xtaci/kcptun</a></p><pre><code class="hljs awk"><span class="hljs-comment">#手动修改代码</span>
 nano <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/kcptun/</span>server-config.json</code></pre><p>修改设置后<code>supervisorctl restart kcptun</code>重启服务</p><p>帮助信息</p><pre><code class="hljs gherkin">命令:service supervisord &#123;start|<span class="hljs-string">stop</span>|<span class="hljs-string">restart</span>|<span class="hljs-string">status&#125;&#123;启动</span>|<span class="hljs-string">关闭</span>|<span class="hljs-string">重启</span>|<span class="hljs-string">查看状态&#125;Kcptun </span>
 <span class="hljs-string">相关命令:supervisorctl &#123;start</span>|<span class="hljs-string">stop</span>|<span class="hljs-string">restart</span>|<span class="hljs-string">status&#125; kcptun&#123;启动</span>|<span class="hljs-string">关闭</span>|<span class="hljs-string">重启</span>|<span class="hljs-string">查看状态&#125;</span></code></pre><p>lean 的openwrt shadowsocks-libev的端口要设置为12948</p><h4 id="4，如果你只使用pc客户端，可以进一步使用udp2raw，udpspeeder防止运营商可能的qos，教程可参考下面链接"><a href="#4，如果你只使用pc客户端，可以进一步使用udp2raw，udpspeeder防止运营商可能的qos，教程可参考下面链接" class="headerlink" title="4，如果你只使用pc客户端，可以进一步使用udp2raw，udpspeeder防止运营商可能的qos，教程可参考下面链接"></a>4，如果你只使用pc客户端，可以进一步使用udp2raw，udpspeeder防止运营商可能的qos，教程可参考下面链接</h4><p><a href="https://www.moerats.com/archives/662/" target="_blank" rel="noopener">https://www.moerats.com/archives/662/</a></p><p><a href="https://github.com/wangyu-/udp2raw-tunnel/blob/master/doc/kcptun_step_by_step.md" target="_blank" rel="noopener">https://github.com/wangyu-/udp2raw-tunnel/blob/master/doc/kcptun_step_by_step.md</a></p>]]></content>
-  </entry>
-  <entry>
-    <title>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</title>
-    <url>/posts/d8b5d3fc.html</url>
-    <content><![CDATA[<h2 id="修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程"><a href="#修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程" class="headerlink" title="修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程"></a>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</h2><p>先去下载<a href="https://www.speedguide.net/downloads.php" target="_blank" rel="noopener"><strong>SG TCP Optimizer</strong></a>使用默认设置优化win10.</p><h3 id="1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前-TCP-全局参数"><a href="#1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前-TCP-全局参数" class="headerlink" title="1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前 TCP 全局参数"></a>1、管理员方式运行cmd命令，在cmd窗口输入以下命令，查看当前 TCP 全局参数</h3><p><code>netsh int tcp show global</code><br><img src="https://tva1.sinaimg.cn/large/007X8olVly1g6nwztaehoj30ek08oq36.jpg" srcset="/img/loading.gif" alt="img"></p><h3 id="2、修改TCP-全局参数。以下4个都要改"><a href="#2、修改TCP-全局参数。以下4个都要改" class="headerlink" title="2、修改TCP 全局参数。以下4个都要改"></a>2、修改TCP 全局参数。以下4个都要改</h3><p><strong>2.1直接缓存访问(DCA)</strong><code>netsh int tcp set global dca=enabled</code></p><p><strong>2.2接收窗口自动调谐级别</strong><code>netsh int tcp set global autotuninglevel=normal</code></p><p><strong>2.3附加拥塞控制提供程序</strong></p><p>Win7用此命令<code>netsh interface tcp set global congestionprovider=ctcp</code><br>Win10用此命令 <code>netsh int tcp set supplemental template=internet congestionprovider=ctcp</code><br><strong>2.4RFC 1323 时间戳</strong><code>netsh int tcp set global timestamps=enabled</code></p><p><img src="https://tva1.sinaimg.cn/large/007X8olVly1g6nx29ro56j30j305p3yk.jpg" srcset="/img/loading.gif" alt="img"></p><p>3、重启电脑</p>]]></content>
   </entry>
   <entry>
     <title>安装Shadowsocks-libev v2ray-plugin</title>
