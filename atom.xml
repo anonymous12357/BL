@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://largesse.12306.recipes/"/>
-  <updated>2020-06-07T04:24:50.317Z</updated>
+  <updated>2020-06-07T15:29:18.421Z</updated>
   <id>https://largesse.12306.recipes/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo Fluid主题 添加自定义字体</title>
+    <link href="https://largesse.12306.recipes/posts/3c2a5351.html"/>
+    <id>https://largesse.12306.recipes/posts/3c2a5351.html</id>
+    <published>2020-06-07T15:09:32.000Z</published>
+    <updated>2020-06-07T15:29:18.421Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;建立目录&quot;&gt;&lt;a href=&quot;#建立目录&quot; class=&quot;headerlink&quot; title=&quot;建立目录&quot;&gt;&lt;/a&gt;建立目录&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;目录在hexo根目录(非theme目录)找到 &lt;strong&gt;source/fonts&lt;/strong&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="https://largesse.12306.recipes/categories/Hexo/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Hexo Fluid 主题教程</title>
@@ -454,29 +479,6 @@
         
         
           &lt;p&gt;参考：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.uud.me/qiwenzalun/autorclone-gclone.html&quot; target=&quot;_blank&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>建立google driver在线目录goindex</title>
-    <link href="https://largesse.12306.recipes/posts/e222848c.html"/>
-    <id>https://largesse.12306.recipes/posts/e222848c.html</id>
-    <published>2020-03-13T12:36:00.465Z</published>
-    <updated>2020-06-03T12:13:54.263Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;建立-GoIndex-无服务器架构-Google-Drive-目录索引和Cloudflare-自定义ip加速访问&quot;&gt;&lt;a href=&quot;#建立-GoIndex-无服务器架构-Google-Drive-目录索引和Cloudflare-自定义ip加速访问&quot;
         
       
     
