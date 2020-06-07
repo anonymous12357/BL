@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://largesse.12306.recipes/"/>
-  <updated>2020-06-07T15:29:18.421Z</updated>
+  <updated>2020-06-07T15:33:26.017Z</updated>
   <id>https://largesse.12306.recipes/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://largesse.12306.recipes/posts/3c2a5351.html"/>
     <id>https://largesse.12306.recipes/posts/3c2a5351.html</id>
     <published>2020-06-07T15:09:32.000Z</published>
-    <updated>2020-06-07T15:29:18.421Z</updated>
+    <updated>2020-06-07T15:33:26.017Z</updated>
     
     <summary type="html">
     
@@ -39,6 +39,10 @@
       <category term="Hexo" scheme="https://largesse.12306.recipes/categories/Hexo/"/>
     
     
+      <category term="Hexo" scheme="https://largesse.12306.recipes/tags/Hexo/"/>
+    
+      <category term="Fluid" scheme="https://largesse.12306.recipes/tags/Fluid/"/>
+    
   </entry>
   
   <entry>
@@ -46,7 +50,7 @@
     <link href="https://largesse.12306.recipes/posts/306655cb.html"/>
     <id>https://largesse.12306.recipes/posts/306655cb.html</id>
     <published>2020-06-07T02:00:00.000Z</published>
-    <updated>2020-06-07T04:24:50.317Z</updated>
+    <updated>2020-06-07T15:33:29.570Z</updated>
     
     <summary type="html">
     
@@ -60,6 +64,8 @@
     
     </summary>
     
+    
+      <category term="Hexo" scheme="https://largesse.12306.recipes/categories/Hexo/"/>
     
     
       <category term="Hexo" scheme="https://largesse.12306.recipes/tags/Hexo/"/>
