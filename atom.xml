@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://largesse.12306.recipes/"/>
-  <updated>2020-06-07T15:33:26.017Z</updated>
+  <updated>2020-06-08T05:47:04.546Z</updated>
   <id>https://largesse.12306.recipes/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简悦 Simple Read  自定义字体教程</title>
+    <link href="https://largesse.12306.recipes/posts/30a9b026.html"/>
+    <id>https://largesse.12306.recipes/posts/30a9b026.html</id>
+    <published>2020-06-08T05:47:04.000Z</published>
+    <updated>2020-06-08T05:47:04.546Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hexo Fluid主题 添加自定义字体</title>
@@ -462,29 +477,6 @@
         
         
           &lt;p&gt;Best Trace 是 &lt;a href=&quot;https://www.24kplus.com/go/ipip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;IPIP&lt;/a&gt; 推出的一款路由追踪器，目前有
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>AutoRclone配合gclone突破GoogleTeamDrive750G流量限制</title>
-    <link href="https://largesse.12306.recipes/posts/e5e17474.html"/>
-    <id>https://largesse.12306.recipes/posts/e5e17474.html</id>
-    <published>2020-03-13T15:39:52.824Z</published>
-    <updated>2020-06-03T12:13:54.241Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;参考：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.uud.me/qiwenzalun/autorclone-gclone.html&quot; target=&quot;_blank&quot;
         
       
     
