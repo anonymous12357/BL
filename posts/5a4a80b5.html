@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Python 黑魔法指南 - Largesse&#39;s blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/custom.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Largesse's blog" type="application/atom+xml"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Largesse's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 主页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 历史文章</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类文章</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 网站介绍</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle">Python 黑魔法指南</span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-06-29 17:38">2020年6月29日 下午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 3.6k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 46 分钟 </span><span id="leancloud-post-views-container" class="post-meta" style="display:none"><i class="iconfont icon-eye" aria-hidden="true"></i> <span id="leancloud-post-views"></span> 次</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h2 id="1、and-和-or-取值顺序"><a href="#1、and-和-or-取值顺序" class="headerlink" title="1、and 和 or 取值顺序"></a>1、and 和 or 取值顺序</h2><ul><li>当一个or表达式中所有值都为真，Python会选择第一个值</li><li>当一个and表达式所有值都为真，Python会选择第二个值。</li></ul><h2 id="2、默认参数不能使用可变变量"><a href="#2、默认参数不能使用可变变量" class="headerlink" title="2、默认参数不能使用可变变量"></a>2、默认参数不能使用可变变量</h2><div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(item, item_list=[])</span>:</span>
+	item_list.append(item)
+	print(item_list)
+func(<span class="hljs-string">'iphone'</span>)
+func(<span class="hljs-string">'xiaomi'</span>, item_list=[<span class="hljs-string">'oppo'</span>,<span class="hljs-string">'vivo'</span>])
+func(<span class="hljs-string">'huawei'</span>)</code></pre></div><p>Python中的def语句在每次执行的时候都初始化一个函数对象，这个函数对象就是我们要调用的函数，可以把它当成一个一般的对象，只不过这个对象拥有一个可执行的方法和部分属性。</p><p>对于参数中提供了初始值的参数，由于Python中的函数参数传递的是对象，也可以认为是传地址， 在第一次初始化def的时候，会先生成这个可变对象的内存地址，然后将这个默认参数item_list会与这个内存地址绑定。在后面的函数调用中，如果调用方指定了新的默认值，就会将原来的默认值覆 盖。如果调用方没有指定新的默认值，那就会使用原来的默认值。</p><p>应该修改为</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(item, item_list=None)</span>:</span>
+    <span class="hljs-keyword">if</span> item_list <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        item_list=[]
+    items=item_list
+    items.append(item)
+    print(items)</code></pre></div><h2 id="3、哪些情况下不需要续行符"><a href="#3、哪些情况下不需要续行符" class="headerlink" title="3、哪些情况下不需要续行符?"></a>3、哪些情况下不需要续行符?</h2><p>经过总结，在这些符号中间的代码换行可以省略掉续行符：[]，（），{}。另外还有，在多行文本注释中’’’ ，续行符也是可以不写的。</p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629195014.png" srcset="/img/loading.gif" alt="image-20200629194954457"></p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629195020.png" srcset="/img/loading.gif" alt="image-20200629195003831"></p><h2 id="4、return不一定都是函数的终点"><a href="#4、return不一定都是函数的终点" class="headerlink" title="4、return不一定都是函数的终点"></a>4、return不一定都是函数的终点</h2><p>众所周知，try…finally…的用法是：不管try里面是正常执行还是有报异常，最终都能保证finally能够执行。同时我们又知道，一个函数里只要遇到return函数就会立马结束。那问题就来了，以上这两种规则，如果同时存在，Python解释器会如何选择？哪个优先级更高？</p><p>写个示例验证一下，就明白啦</p><p>如果try里的return真的是直接被忽视吗？</p><p>我们都知道如果一个函数没有return,会隐式的返回None,假设try里的return真的是直接被忽 视，那当finally下没有显式的return的时候，是不是会返回None昵？</p><p>还是写个示例来验证一下：</p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629195421.png" srcset="/img/loading.gif" alt="image-20200629195421863"></p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629195433.png" srcset="/img/loading.gif" alt="image-20200629195433351"></p><p>那结论就出来了，如果finally里有显式的return,那么这个return会直接覆盖try里的return, 而如果finally里没有显式的return,那么try里的return仍然有效。</p><h2 id="5、神奇的Intern机制，为什么字符串是不可变对象"><a href="#5、神奇的Intern机制，为什么字符串是不可变对象" class="headerlink" title="5、神奇的Intern机制，为什么字符串是不可变对象"></a>5、神奇的Intern机制，为什么字符串是不可变对象</h2><p>Python解释器中使用了 intern (字符串驻留）的技术来提高字符串效率，什么是intern机制？ 就是同样的字符串对象仅仅会保存一份，放在一个字符串储蓄池中，是共用的，当然，肯定不能改 变，这也决定了字符串必须是不可变对象。</p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629195922.png" srcset="/img/loading.gif" alt="image-20200629195922618"></p><h2 id="6、反转字符串-列表"><a href="#6、反转字符串-列表" class="headerlink" title="6、反转字符串/列表"></a>6、反转字符串/列表</h2><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629200054.png" srcset="/img/loading.gif" alt="image-20200629200054795"></p><h2 id="7、字符串的分割技巧"><a href="#7、字符串的分割技巧" class="headerlink" title="7、字符串的分割技巧"></a>7、字符串的分割技巧</h2><p>当我们对字符串进行分割时，且分割符是\n，有可能会出现这样一个窘境：</p><div class="hljs"><pre><code class="hljs python">str = <span class="hljs-string">"a\nb\n"</span>
+print(str)
+str.split(<span class="hljs-string">'\n'</span>)
+[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>,<span class="hljs-string">''</span>]</code></pre></div><p>会在最后一行多出一个元素，为了应对这种情况，你可以会多加一步处理。</p><p>但我想说的是，完成没有必要，对于这个场景，你可以使用splitlines</p><div class="hljs"><pre><code class="hljs python">str.splitlines()
+[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>]</code></pre></div><h2 id="8、-不等同于"><a href="#8、-不等同于" class="headerlink" title="8、+=不等同于=+"></a>8、+=不等同于=+</h2><p>对列表进行+=操作相当于extend，而使用=+操作是新增了一个列表。 因此会有如下两者的差异。</p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629213240.png" srcset="/img/loading.gif" alt="image-20200629213240765"></p><p><img src="https://raw.githubusercontent.com/anonymous12357/fitness/master/20200629213251.png" srcset="/img/loading.gif" alt="image-20200629213251167"></p><h2 id="9、增量赋值的性能更好"><a href="#9、增量赋值的性能更好" class="headerlink" title="9、增量赋值的性能更好"></a>9、增量赋值的性能更好</h2><p>诸如+=和*=这些运算符，叫做增量赋值运算符。</p><p>这里使用用+=举例，以下两种写法，在效果上是等价的。</p><div class="hljs"><pre><code class="hljs python">第<span class="hljs-number">1</span>种
+a = <span class="hljs-number">1</span> ; a += <span class="hljs-number">1</span>
+第<span class="hljs-number">2</span>种
+a = <span class="hljs-number">1</span>; a = a + <span class="hljs-number">1</span></code></pre></div><p>+=其背后使用的魔法方法是<strong>iadd</strong>，如果没有实现这个方法则会退而求其次，使用<strong>add</strong><br>这两种写法有什么区别昵？</p><p>用列表举例a+=b,使用<strong>iadd</strong>的话就像是使用了a.extend(b),如果使用<strong>add</strong>的话，则是a = a+b，前者是直接在原列表上进行扩展，而后者是先从原列表中取出值，在一个新的列表中进行扩 展，然后再将新的列表对象返回给变量，显然后者的消耗要大些。所以在能使用增量赋值的时候尽量使用它。</p><h2 id="10、连接多个列表"><a href="#10、连接多个列表" class="headerlink" title="10、连接多个列表"></a>10、连接多个列表</h2><h3 id="10-1-利用sum"><a href="#10-1-利用sum" class="headerlink" title="10.1 利用sum"></a>10.1 利用sum</h3><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>c = [<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+&gt;&gt;&gt;
+<span class="hljs-meta">&gt;&gt;&gt; </span>sum((a,b,c),[]) [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]</code></pre></div><h3 id="10-2-使用-对多个列表进行相加"><a href="#10-2-使用-对多个列表进行相加" class="headerlink" title="10.2 使用+对多个列表进行相加"></a>10.2 使用+对多个列表进行相加</h3><div class="hljs"><pre><code class="hljs python">list02 + list03
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre></div><h3 id="10-3-借助itertools"><a href="#10-3-借助itertools" class="headerlink" title="10.3 借助itertools"></a>10.3 借助itertools</h3><p>使用itertools.chain()函数先可迭代对象（在这里指的是列表）串联起来，组成一个更大的可迭代对象。最后你再利用list将其转化为列表。</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> itertools <span class="hljs-keyword">import</span> chain 
+<span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list03 = [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]
+&gt;&gt;&gt;
+<span class="hljs-meta">&gt;&gt;&gt; </span>list(chain(list01, list02, list03))
+[i, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre></div><h3 id="10-4-使用-解包"><a href="#10-4-使用-解包" class="headerlink" title="10.4 使用*解包"></a>10.4 使用*解包</h3><p>使用*可以解包列表，解包后再合并。 示例如下：</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>] 
+
+list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+
+<span class="hljs-meta">&gt;&gt;&gt; </span>[*list01, *list02] [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]</code></pre></div><h3 id="10-5-使用extend"><a href="#10-5-使用extend" class="headerlink" title="10.5 使用extend"></a>10.5 使用extend</h3><p>在字典中，使用update可实现原地更新，而在列表中，使用extend可实现列表的自我扩展。</p><div class="hljs"><pre><code class="hljs angelscript">&gt;&gt;&gt; list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+&gt;&gt;&gt; list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+&gt;&gt;&gt; list01.extend(list02)
+&gt;&gt;&gt; <span class="hljs-number">1</span>ist01
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]</code></pre></div><h3 id="10-6-使用列表推导式"><a href="#10-6-使用列表推导式" class="headerlink" title="10.6 使用列表推导式"></a>10.6 使用列表推导式</h3><p>Python里对于生成列表、集合、字典，有一套非常Pythonnic的写法。那就是列表解析式，集合解析式和字典解析式，通常是Python发烧友的最爱，那么今天的主题：列 表合并，列表推导式还能否胜任昵？当然可以，具体示例代码如下：</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">1</span>ist03 = [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>[x <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> (list01, list02, list03) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> l]
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre></div><h3 id="10-7-使用heapq"><a href="#10-7-使用heapq" class="headerlink" title="10.7 使用heapq"></a>10.7 使用heapq</h3><p>heapq是Python的一个标准模块，它提供了堆排序算法的实现。 该模块里有一个merge方法，可以用于合并多个列表，如下所示</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list03 = [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> heapq <span class="hljs-keyword">import</span> merge
+<span class="hljs-meta">&gt;&gt;&gt; </span>list(merge(list01, list02, list03)) [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre></div><p>要注意的是，heapq.merge除了合并多个列表外，它还会将合并后的最终的列表进行排序。</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list02 = [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list03 = [<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> heapq <span class="hljs-keyword">import</span> merge &gt;&gt;&gt;
+<span class="hljs-meta">&gt;&gt;&gt; </span>list(merge(list01, list02, list03)) 
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>]</code></pre></div><p>它的效果等价于下面这行代码:</p><div class="hljs"><pre><code class="hljs python">sorted(itertools.chain(*iterables))</code></pre></div><p>如果你希望得到一个始终有序的列表，那请第一时间想到heapq.merge，因为它采用堆排序，效率 非常高。但若你不希望得到一个排过序的列表，就不要使用它了。</p><h3 id="10-8-使用yield-from"><a href="#10-8-使用yield-from" class="headerlink" title="10.8 使用yield from"></a>10.8 使用yield from</h3><p>在yield from后可接一个可迭代对象，用于迭代并返回其中的每一个元素。 因此，我们可以像下面这样自定义一个合并列表的工具函数。</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>list01 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list02 = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span>list03 = [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span><span class="hljs-params">(*lists)</span>:</span>
+		<span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> lists:
+		<span class="hljs-keyword">yield</span> <span class="hljs-keyword">from</span> l
+<span class="hljs-meta">&gt;&gt;&gt; </span>list(merge(list01, list02, list03)) 
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre></div><h2 id="11、-合并字典的8种方法"><a href="#11、-合并字典的8种方法" class="headerlink" title="11、 合并字典的8种方法"></a>11、 合并字典的8种方法</h2><h3 id="11-1-最简单的原地更新"><a href="#11-1-最简单的原地更新" class="headerlink" title="11.1 最简单的原地更新"></a>11.1 最简单的原地更新</h3><p>字典对象内置了一个update方法，用于把另一个字典更新到自己身上。</p><div class="hljs"><pre><code class="hljs python">profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">27</span>&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;
+profile.update(ext_info)
+print(profile)
+&#123;TnameT: TxiaomingT, TageT: <span class="hljs-number">27</span>, TgenderT: TmaleT&#125;</code></pre></div><p>如果想使用update这种最简单、最地道原生的方法，但又不想更新到自己身上，而是生成一个新的 对象，那请使用深拷贝。<br></p><div class="hljs"><pre><code class="hljs python">| &gt;&gt;&gt; profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>:<span class="hljs-number">27</span>&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;   
+<span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> deepcopy                     
+full_profile =  deepcopy(profile) full_profile.update(ext_info) 
+print(full_profile)  &#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;
+print(profile)  &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>:  <span class="hljs-number">27</span>&#125;</code></pre></div><p></p><h3 id="11-2-先解包再合并字典"><a href="#11-2-先解包再合并字典" class="headerlink" title="11.2 先解包再合并字典"></a>11.2 先解包再合并字典</h3><p>使用**可以解包字典，解包完后再使用diet或者就可以合并。</p><div class="hljs"><pre><code class="hljs python">profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">27</span>&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;
+full_profile01 = &#123;**profile, **ext_info&#125;
+print(full_profile01)
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;
+full_profile02 = dict(**profile, **ext_info)
+print(full_profile02)
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;</code></pre></div><h3 id="11-3-借助itertools"><a href="#11-3-借助itertools" class="headerlink" title="11.3 借助itertools"></a>11.3 借助itertools</h3><p>在Python里有一个非常强大的内置模块，它专门用于操作可迭代对象。正好我们字典也是可迭代对象，自然就可以想到，可以使用itertools.chain()函数先将多个字 典（可迭代对象）串联起来，组成一个更大的可迭代对象，然后再使用diet转成字典。</p><div class="hljs"><pre><code class="hljs python"> <span class="hljs-keyword">import</span> itertools 
+profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">27</span>&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;
+dict(itertools.chain(profile.items()，ext_info.items()))
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>， <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>， <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;</code></pre></div><h3 id="11-4-借助ChainMap"><a href="#11-4-借助ChainMap" class="headerlink" title="11.4 借助ChainMap"></a>11.4 借助ChainMap</h3><p>如果可以引入一个辅助包，那我就再提一个，ChainMap也可以达到和itertools同样的效</p><div class="hljs"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> collections import ChainMap &gt;&gt;&gt;
+profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>， <span class="hljs-string">"age"</span>: 27&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;
+dict(ChainMap(profile， ext_info))
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>， <span class="hljs-string">'age'</span>: 27， <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;</code></pre></div><p>使用ChainMap有一点需要注意，当字典间有重复的键时，只会取第一个值，排在后面的键值并不 会更新掉前面的（使用itertools就不会有这个问题）。</p><div class="hljs"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> collections import ChainMap &gt;&gt;&gt;
+profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>， <span class="hljs-string">"age"</span>: 27&#125;
+ext_info=&#123;<span class="hljs-string">"age"</span>: 30&#125;
+dict(ChainMap(profile， ext_info))
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>， <span class="hljs-string">'age'</span>: 27&#125;</code></pre></div><h3 id="11-5-字典解析式"><a href="#11-5-字典解析式" class="headerlink" title="11.5 字典解析式"></a>11.5 字典解析式</h3><p>Python里对于生成列表、集合、字典，有一套非常Pythonnic的写法。那就是列表解析式，集合解析式和字典解析式，通常是Python发烧友的最爱，那么今天的主题：字 典合并，字典解析式还能否胜任昵？当然可以，具体示例代码如下：</p><div class="hljs"><pre><code class="hljs python">profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">27</span>&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125; &gt;&gt;&gt;
+&#123;k:v <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> [profile, ext_info] <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> d.items〇&#125; &#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;</code></pre></div><h3 id="11-6-Python3-9新特性"><a href="#11-6-Python3-9新特性" class="headerlink" title="11.6 Python3.9新特性"></a>11.6 Python3.9新特性</h3><p>在2月份发布的Python3.9.04a版本中，新增了一个抓眼球的新操作符操作符：|，PEP584 将它称之为合并操作符（UnionOperator),用它可以很直观地合并多个字典。</p><div class="hljs"><pre><code class="hljs routeros">profile = &#123;<span class="hljs-string">"name"</span>: <span class="hljs-string">"xiaoming"</span>, <span class="hljs-string">"age"</span>: 27&#125;
+ext_info = &#123;<span class="hljs-string">"gender"</span>: <span class="hljs-string">"male"</span>&#125;
+profile | ext_info
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: 27, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125; 
+ext_info | profile
+&#123;<span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>, <span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: 27&#125;</code></pre></div><p>除了 |操作符之外，还有另外一个操作符|=，类似于原地更新。</p><div class="hljs"><pre><code class="hljs python">profile  |=  ext_info 
+profile
+&#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'xiaoming'</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>, <span class="hljs-string">'gender'</span>: <span class="hljs-string">'male'</span>&#125;</code></pre></div><h2 id="12-条件语句的七种写法"><a href="#12-条件语句的七种写法" class="headerlink" title="12 条件语句的七种写法"></a>12 条件语句的七种写法</h2><h3 id="12-1-原代码"><a href="#12-1-原代码" class="headerlink" title="12.1 原代码"></a>12.1 原代码</h3><div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">if</span> age &gt; <span class="hljs-number">18</span>	:
+	<span class="hljs-keyword">return</span>	<span class="hljs-string">"已成年"</span>
+<span class="hljs-keyword">else</span>:	
+	<span class="hljs-keyword">return</span>	<span class="hljs-string">"未成年"</span></code></pre></div><h3 id="12-2-if-else"><a href="#12-2-if-else" class="headerlink" title="12.2  if  else "></a>12.2<on_true>if<condition>else<on_false></on_false></condition></on_true></h3><div class="hljs"><pre><code class="hljs python">agel = <span class="hljs-number">20</span> 
+msg1 =<span class="hljs-string">"已成年"</span><span class="hljs-keyword">if</span> age1 &gt; <span class="hljs-number">18</span> <span class="hljs-keyword">else</span> <span class="hljs-string">"未成年"</span></code></pre></div><h3 id="12-3-and-or"><a href="#12-3-and-or" class="headerlink" title="12.3  and  or "></a>12.3<condition>and<on_true>or<on_false></on_false></on_true></condition></h3><div class="hljs"><pre><code class="hljs python">msgl = agel &gt; <span class="hljs-number">18</span> <span class="hljs-keyword">and</span> <span class="hljs-string">"已成年"</span><span class="hljs-keyword">or</span> <span class="hljs-string">"未成年"</span></code></pre></div><h3 id="12-4-condition"><a href="#12-4-condition" class="headerlink" title="12.4 (, )[condition]"></a>12.4 (<on_true>,<on_false>)[condition]</on_false></on_true></h3><div class="hljs"><pre><code class="hljs ini"><span class="hljs-attr">msg1</span> =(<span class="hljs-string">"未成年"</span>，<span class="hljs-string">"已成年"</span>）[age1 &gt; <span class="hljs-number">18</span>]</code></pre></div><h3 id="12-5-lambda-1ambda"><a href="#12-5-lambda-1ambda" class="headerlink" title="12.5 (lambda: , 1ambda:)"></a>12.5 (lambda:<on_false>, 1ambda:<on_true>)<a href=""><condition></condition></a></on_true></on_false></h3><div class="hljs"><pre><code class="hljs python">msg1 = (<span class="hljs-keyword">lambda</span>:<span class="hljs-string">"未成年"</span>，<span class="hljs-keyword">lambda</span>:<span class="hljs-string">"已成年"</span>）[age1 &gt; <span class="hljs-number">18</span>]()</code></pre></div><h3 id="12-6-True-，-False"><a href="#12-6-True-，-False" class="headerlink" title="12.6 {True: ， False: }[]"></a>12.6 {True:<on_true>， False:<on_false>}[<condition>]</condition></on_false></on_true></h3><div class="hljs"><pre><code class="hljs python">msgl = &#123;<span class="hljs-literal">True</span>:<span class="hljs-string">"已成年"</span>，<span class="hljs-literal">False</span>:<span class="hljs-string">"未成年"</span>&#125;[age1 &gt; <span class="hljs-number">18</span>]</code></pre></div><h3 id="12-7-and-，）or-，-0"><a href="#12-7-and-，）or-，-0" class="headerlink" title="12.7 (() and (，）or (，))[0]"></a>12.7 ((<condition>) and (<on_true>，）or (<on_false>，))[0]</on_false></on_true></condition></h3><div class="hljs"><pre><code class="hljs python">msg1 = ((age1 &gt; <span class="hljs-number">18</span>) <span class="hljs-keyword">and</span> (<span class="hljs-string">"已成年"</span>，）<span class="hljs-keyword">or</span> (<span class="hljs-string">"未成年"</span>，））[<span class="hljs-number">0</span>]</code></pre></div><h2 id="13-usr-bin-env-python-有什么用？"><a href="#13-usr-bin-env-python-有什么用？" class="headerlink" title="13  /usr/bin/env python 有什么用？"></a>13 /usr/bin/env python 有什么用？</h2><p>我们经常会在别人的脚本或者项目的入口文件里看到第一行是下面这样 #!/usr/bin/python 或者这样 #!/usr/bin/env python.不加的话，你每次执行这个脚本时，都得这样：python xx.py。</p><p>​ 明白了这个后，再来看看！/usr/bin/env python这个又是什么意思？ 当我执行env python时，自动进入了 pythonconsole的模式。当你执行env python时，它其实会去env | grep PATH里（也就是 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin)这几个路径里去依次查找名为 python的可执行文件。找到一个就直接执行，上面我们的python路径是在/usr/bin/python里，在PATH列表里倒 数第二个目录下，所以当我在/usr/local/sbin下创建一个名字也为python的可执行文件时， 就会执行 /usr/bin/python 了。</p><p><strong>那么对于这两者，我们应该使用哪个昵？</strong></p><p>​ 个人感觉应该优先使用#!/usr/bin/env python ,因为不是所有的机器的python解释器都是 /usr/bin/python</p><h2 id="14-没有root权限时，如何安装Python的第三方包昵？"><a href="#14-没有root权限时，如何安装Python的第三方包昵？" class="headerlink" title="14 没有root权限时，如何安装Python的第三方包昵？"></a>14 没有root权限时，如何安装Python的第三方包昵？</h2><p>可以使用pip install —user pkg将你的包安装在你的用户环境中，该用户环境与全局环境并 不冲突，并且多用户之间相互隔离，互不影响</p><h2 id="15-自带的缓存机制"><a href="#15-自带的缓存机制" class="headerlink" title="15 自带的缓存机制"></a>15 自带的缓存机制</h2><p>数据的生成过程可能需要经过计算，规整，远程获取等操作，如果是同一份数据需要多次使用，每次 都重新生成会大大浪费时间。所以，如果将计算或者远程请求等操作获得的数据缓存下来，会加快后</p><p>续的数据获取需求。</p><p>为了实现这个需求，Python 3.2 +中给我们提供了一个机制，可以很方便的实现，而不需要你去写 这样的逻辑代码。</p><p>这个机制实现于functool模块中的lru_cache装饰器。</p><p>@functools.1ru_cache(maxsi ze=None, typed=False)</p><p>参数解读：</p><p>• maxsize:最多可以缓存多少个此函数的调用结果，如果为None，贝I」无限制，设置为2的幂 时，性能最佳</p><p>• typed:若为True，则不同参数类型的调用将分别缓存。</p><p>举个例子</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> <span class="hljs-number">1</span>ru_cache
+
+<span class="hljs-meta">@1ru_cache(None) </span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span><span class="hljs-params">(x, y)</span>:</span>
+	print(<span class="hljs-string">"calculating: %s + %s"</span> % (x, y)) 
+	<span class="hljs-keyword">return</span> x + y
+
+print(add(l, <span class="hljs-number">2</span>)) 
+print(add(l, <span class="hljs-number">2</span>))
+
+<span class="hljs-comment">#第二次调用并没有真正的执行函数体，而是直接返回缓存里的结果</span></code></pre></div><h2 id="16-重定向标准输出到日志"><a href="#16-重定向标准输出到日志" class="headerlink" title="16 重定向标准输出到日志"></a>16 重定向标准输出到日志</h2><p>假设你有一个脚本，会执行一些任务，比如说集群健康情况的检查。检查完成后，会把各服务的的健康状况以JSON字符串的形式打印到标准输出。如果代码有问题，导致异常处理不足，最终检查失败，是很有可能将一些错误异常栈输出到标准错误 或标准输出上。由于最初约定的脚本返回方式是以JSON的格式输出，此时你的脚本却输出各种错误异常，异常调 用方也无法解析。</p><p>如何避免这种情况的发生昵？我们可以这样做，把你的标准错误输出到日志文件中。</p><div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">import</span> contextlib
+
+<span class="hljs-number">1</span>og_fi1e=<span class="hljs-string">"/var/1og/you.1og"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">you_task</span><span class="hljs-params">()</span>： </span>
+<span class="hljs-function">	<span class="hljs-title">pass</span></span>
+<span class="hljs-function"></span>
+<span class="hljs-function">@<span class="hljs-title">contextlib</span>.<span class="hljs-title">contextmanager</span> </span>
+<span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">close_stdout</span><span class="hljs-params">()</span>：</span>
+	raw_stdout = sys.stdout 
+	file = open(log_file, <span class="hljs-string">'a+'</span>) 
+	sys.stdout = file
+	<span class="hljs-keyword">yield</span>
+	sys.stdout = raw_stdout 
+	file.close()
+
+<span class="hljs-keyword">with</span> close_stdout()： 
+	you_task()</code></pre></div></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/python/">python</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"></div><div class="post-next col-6"><a href="/posts/30a9b026.html"><span class="hidden-mobile">简悦 Simple Read 自定义字体教程</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"U5EjlpwRPtyuJbkw3W4fnYmS-MdYXbMMI",app_key:"KwvDqIaX2gD0Uz16BBBFOFpe",placeholder:"说点什么",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!1,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="statistics"><span id="leancloud-site-pv-container" style="display:none">总访问量 <span id="leancloud-site-pv"></span> 次 </span><span id="leancloud-site-uv-container" style="display:none">总访客数 <span id="leancloud-site-uv"></span> 人</span></div></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("06/06/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div><p id="hitokoto">:D 获取中...</p><script>fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto')
+      hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)</script></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script defer>(function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/posts/5a4a80b5.html');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'daehpApznWemki2mAr5g5iUk-MdYXbMMI'
+    var app_key = '7k2qX6C31gEh2CuXOSKXyYW3'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();</script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script defer>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-168739774-1","auto"),ga("send","pageview")</script></body></html>

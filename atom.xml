@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://largesse.12306.recipes/"/>
-  <updated>2020-06-08T06:06:24.923Z</updated>
+  <updated>2020-07-11T02:14:21.340Z</updated>
   <id>https://largesse.12306.recipes/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python 黑魔法指南</title>
+    <link href="https://largesse.12306.recipes/posts/5a4a80b5.html"/>
+    <id>https://largesse.12306.recipes/posts/5a4a80b5.html</id>
+    <published>2020-06-29T09:38:31.000Z</published>
+    <updated>2020-07-11T02:14:21.340Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1、and-和-or-取值顺序&quot;&gt;&lt;a href=&quot;#1、and-和-or-取值顺序&quot; class=&quot;headerlink&quot; title=&quot;1、and 和 or 取值顺序&quot;&gt;&lt;/a&gt;1、and 和 or
+        
+      
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://largesse.12306.recipes/categories/python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>简悦 Simple Read  自定义字体教程</title>
@@ -462,29 +487,6 @@
         
         
           &lt;p&gt;Linux 管理员的一个重要任务是保护服务器免受非法攻击或访问。 默认情况下，Linux 系统带有配置良好的防火墙，比如iptables、Uncomplicated Firewall（UFW），ConfigServer Security
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>besttrace回程测速方法</title>
-    <link href="https://largesse.12306.recipes/posts/c863342b.html"/>
-    <id>https://largesse.12306.recipes/posts/c863342b.html</id>
-    <published>2020-03-14T03:44:35.099Z</published>
-    <updated>2020-06-03T12:13:54.252Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Best Trace 是 &lt;a href=&quot;https://www.24kplus.com/go/ipip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;IPIP&lt;/a&gt; 推出的一款路由追踪器，目前有
         
       
     
