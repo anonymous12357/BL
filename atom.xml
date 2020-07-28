@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://largesse.12306.recipes/"/>
-  <updated>2020-07-11T02:14:21.340Z</updated>
+  <updated>2020-07-27T04:12:51.242Z</updated>
   <id>https://largesse.12306.recipes/</id>
   
   <author>
@@ -17,11 +17,76 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>dw33d 编译最新ssrplus潘多拉固件</title>
+    <link href="https://largesse.12306.recipes/posts/b78bb9ab.html"/>
+    <id>https://largesse.12306.recipes/posts/b78bb9ab.html</id>
+    <published>2020-07-26T14:45:02.738Z</published>
+    <updated>2020-07-27T04:12:51.242Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h1&gt;&lt;p&gt;系统：Ubuntu 18.04.3 LTS&lt;/p&gt;&lt;div class=&quot;hljs&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vps 测速代码</title>
+    <link href="https://largesse.12306.recipes/posts/25d6bbef.html"/>
+    <id>https://largesse.12306.recipes/posts/25d6bbef.html</id>
+    <published>2020-07-15T13:55:52.023Z</published>
+    <updated>2020-07-15T13:56:22.891Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;div class=&quot;hljs&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs vim&quot;&gt;curl -sSL http&lt;span class=&quot;hljs-variable&quot;&gt;s:&lt;/span&gt;//&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python for Data Analysis 学习摘要</title>
+    <link href="https://largesse.12306.recipes/posts/352bde38.html"/>
+    <id>https://largesse.12306.recipes/posts/352bde38.html</id>
+    <published>2020-07-11T05:06:14.000Z</published>
+    <updated>2020-07-21T00:17:12.113Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://largesse.12306.recipes/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://largesse.12306.recipes/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python 黑魔法指南</title>
     <link href="https://largesse.12306.recipes/posts/5a4a80b5.html"/>
     <id>https://largesse.12306.recipes/posts/5a4a80b5.html</id>
     <published>2020-06-29T09:38:31.000Z</published>
-    <updated>2020-07-11T02:14:21.340Z</updated>
+    <updated>2020-07-11T02:14:51.274Z</updated>
     
     <summary type="html">
     
@@ -382,11 +447,11 @@
   </entry>
   
   <entry>
-    <title>安装Shadowsocks-libev v2ray-plugin</title>
+    <title>安装Shadowsocks-libev、Nginx、acme.sh SSL认证;使用 v2ray-plugin 协议</title>
     <link href="https://largesse.12306.recipes/posts/9685df88.html"/>
     <id>https://largesse.12306.recipes/posts/9685df88.html</id>
     <published>2020-04-21T15:51:19.082Z</published>
-    <updated>2020-06-03T12:13:54.260Z</updated>
+    <updated>2020-07-24T03:04:18.601Z</updated>
     
     <summary type="html">
     
@@ -418,75 +483,6 @@
         
         
           &lt;div class=&quot;hljs&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs angelscript&quot;&gt;./udp2raw_amd64 -s -l0&lt;span class=&quot;hljs-number&quot;&gt;.0&lt;/span&gt;&lt;span
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Termux 使用教程</title>
-    <link href="https://largesse.12306.recipes/posts/3909ede9.html"/>
-    <id>https://largesse.12306.recipes/posts/3909ede9.html</id>
-    <published>2020-03-15T13:12:12.454Z</published>
-    <updated>2020-06-03T12:13:54.246Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Termux-使用教程&quot;&gt;&lt;a href=&quot;#Termux-使用教程&quot; class=&quot;headerlink&quot; title=&quot;Termux 使用教程&quot;&gt;&lt;/a&gt;Termux 使用教程&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>修改win10 tcp配置参数来提升酸酸乳打开youtube的速度教程</title>
-    <link href="https://largesse.12306.recipes/posts/d8b5d3fc.html"/>
-    <id>https://largesse.12306.recipes/posts/d8b5d3fc.html</id>
-    <published>2020-03-15T10:21:27.686Z</published>
-    <updated>2020-06-03T12:13:54.255Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程&quot;&gt;&lt;a href=&quot;#修改win10-tcp配置参数来提升酸酸乳打开youtube的速度教程&quot; class=&quot;headerlink&quot; title=&quot;修改win10
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Fail2Ban 禁止服务器上的非法访问</title>
-    <link href="https://largesse.12306.recipes/posts/f3bca7b5.html"/>
-    <id>https://largesse.12306.recipes/posts/f3bca7b5.html</id>
-    <published>2020-03-15T10:05:15.781Z</published>
-    <updated>2020-06-03T12:13:54.244Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Linux 管理员的一个重要任务是保护服务器免受非法攻击或访问。 默认情况下，Linux 系统带有配置良好的防火墙，比如iptables、Uncomplicated Firewall（UFW），ConfigServer Security
         
       
     
