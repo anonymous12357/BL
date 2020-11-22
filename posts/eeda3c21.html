@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Awesome-TTRSS（Tiny Tiny RSS） 迁移（复制）到另一个服务器（VPS）步骤 - Largesse&#39;s blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/custom.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Largesse's blog" type="application/atom+xml"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Largesse's Blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 主页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 历史文章</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类文章</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 网站介绍</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/default.png) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle">Awesome-TTRSS（Tiny Tiny RSS） 迁移（复制）到另一个服务器（VPS）步骤</span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-11-22 16:49">2020年11月22日 下午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 2.7k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 35 分钟 </span><span id="leancloud-post-views-container" class="post-meta" style="display:none"><i class="iconfont icon-eye" aria-hidden="true"></i> <span id="leancloud-post-views"></span> 次</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="Awesome-TTRSS（Tiny-Tiny-RSS）-迁移（复制）到另一个服务器（VPS）步骤"><a href="#Awesome-TTRSS（Tiny-Tiny-RSS）-迁移（复制）到另一个服务器（VPS）步骤" class="headerlink" title="Awesome-TTRSS（Tiny Tiny RSS） 迁移（复制）到另一个服务器（VPS）步骤"></a>Awesome-TTRSS（Tiny Tiny RSS） 迁移（复制）到另一个服务器（VPS）步骤</h1><h2 id="1-查看原始服务器docker状态（确保在root状态下操作）"><a href="#1-查看原始服务器docker状态（确保在root状态下操作）" class="headerlink" title="1 查看原始服务器docker状态（确保在root状态下操作）"></a>1 查看原始服务器docker状态（确保在root状态下操作）</h2><h3 id="1-1-查看原始容器ID"><a href="#1-1-查看原始容器ID" class="headerlink" title="1.1 查看原始容器ID"></a>1.1 查看原始容器ID</h3><div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker ps</span></code></pre></div><h3 id="1-2-查看postgres状态"><a href="#1-2-查看postgres状态" class="headerlink" title="1.2 查看postgres状态"></a>1.2 查看postgres状态</h3><div class="hljs"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it &#123;ID&#125; env</code></pre></div><p>一般结果得到<code>PG_USER=postgres</code>，其中<code>postgres</code>是后面用到的备份数据库用户名</p><h3 id="1-3-查看postgres文件夹体积"><a href="#1-3-查看postgres文件夹体积" class="headerlink" title="1.3 查看postgres文件夹体积"></a>1.3 查看postgres文件夹体积</h3><div class="hljs"><pre><code class="hljs fortran">du -h --<span class="hljs-built_in">max</span>-depth=<span class="hljs-number">1</span> ~/postgres/<span class="hljs-keyword">data</span>/</code></pre></div><h3 id="1-4-备份postgres文件夹"><a href="#1-4-备份postgres文件夹" class="headerlink" title="1.4 备份postgres文件夹"></a>1.4 备份postgres文件夹</h3><p><strong>方法1</strong>：整个文件夹备份，传输到新服务器（确保将要在新服务器部署的postgres版本一致，否则采用第二个方法）</p><div class="hljs"><pre><code class="hljs haskell"><span class="hljs-title">tar</span> zxvf  postgres.tar.gz -<span class="hljs-type">C</span> ~/postgres/<span class="hljs-class"><span class="hljs-keyword">data</span>/</span></code></pre></div><p><strong>方法2</strong>：利用postgres自带备份方法，其中下面命令中第二个postgres为上面用户名</p><div class="hljs"><pre><code class="hljs pgsql">docker exec postgres pg_dumpall -c -U postgres &gt; export.<span class="hljs-keyword">sql</span></code></pre></div><h2 id="2-在新服务器安装Awesome-TTRSS"><a href="#2-在新服务器安装Awesome-TTRSS" class="headerlink" title="2 在新服务器安装Awesome-TTRSS"></a>2 在新服务器安装Awesome-TTRSS</h2><h3 id="2-1-安装-Docker"><a href="#2-1-安装-Docker" class="headerlink" title="2.1 安装 Docker"></a>2.1 安装 Docker</h3><p>Docker 是非常优秀的虚拟化容器，借助于 Docker 我们可以方便的部署 Tiny Tiny RSS，首先我们在服务器上安装 Docker 本体。在服务器上面执行下面命令来安装 Docker：</p><div class="hljs"><pre><code class="hljs bash">curl -fsSL https://get.docker.com/ | sh</code></pre></div><p>然后启动 Docker 服务：</p><div class="hljs"><pre><code class="hljs bash">sudo systemctl start docker</code></pre></div><p>然后，我们检查一下 Docker 是否启动成功。我们执行命令：<code>sudo systemctl status docker</code>：</p><h3 id="2-2-安装-docker-compose"><a href="#2-2-安装-docker-compose" class="headerlink" title="2.2 安装 docker-compose"></a>2.2 安装 docker-compose</h3><p>接下来我们安装 <code>docker-compose</code>：一个管理和启动多个 Docker 容器的工具。由于 Tiny Tiny RSS 依赖有 PostgreSQL 的数据库服务以及 <a href="https://github.com/HenryQW/mercury_fulltext" target="_blank" rel="noopener">mercury_fulltext</a> 的全文抓取服务等等，这些服务我们都借助于 Docker 部署，因此利用 <code>docker-compose</code> 就会大大降低我们的部署难度。</p><p>我们继续，在服务器上面执行下面的命令来安装 <code>docker-compose</code>：</p><div class="hljs"><pre><code class="hljs bash">curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="hljs-built_in">local</span>/bin/docker-compose</code></pre></div><p>之后给予安装好的 <code>docker-compose</code> 可执行权限：</p><div class="hljs"><pre><code class="hljs bash">chmod +x /usr/<span class="hljs-built_in">local</span>/bin/docker-compose</code></pre></div><p><em>参考资料：<a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Install Docker Compose | Docker Documentation</a></em></p><p>最后我们运行 <code>docker-compose --version</code> 来检查安装是否成功。如果有如下输出，说明我们的 <code>docker-compose</code> 安装成功：</p><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220309-3.jpg" srcset="/img/loading.gif" alt="检查 docker-compose 安装情况">检查 docker-compose 安装情况</p><h3 id="2-3-安装-Tiny-Tiny-RSS-及其周边服务"><a href="#2-3-安装-Tiny-Tiny-RSS-及其周边服务" class="headerlink" title="2.3 安装 Tiny Tiny RSS 及其周边服务"></a>2.3 安装 Tiny Tiny RSS 及其周边服务</h3><p>准备工作已经全部完成，接下来我们下载由 Awesome-TTRSS 配置的 Tiny Tiny RSS 服务的 docker-compose 配置文件：</p><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 创建 ttrss 目录并进入</span>
+mkdir ttrss &amp;&amp; <span class="hljs-built_in">cd</span> ttrss
+
+<span class="hljs-comment"># 利用 curl 下载 ttrss 的 docker-compose 配置文件至服务器</span>
+curl -fLo docker-compose.yml https://github.com/HenryQW/Awesome-TTRSS/raw/master/docker-compose.yml</code></pre></div><p>修改 docker-compose.yml 里面的内容：</p><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220309-4.png" srcset="/img/loading.gif" alt="修改 docker-compose 配置文件">修改 docker-compose 配置文件</p><ul><li>在配置文件的第 7 行和第 23 行，将 PostgreSQL 数据库的默认密码进行修改（<strong>确保密码在前后服务器一致</strong>）。暴露在公网的数据库使用默认密码非常危险。</li><li>在配置文件的第 18 行，将 Tiny Tiny RSS 服务的部署网址修改。比如我的部署网址是 <code>https://ttrss.tenkeyseven.com/</code> - 注意，如果你的部署 URL 包含端口（比如默认部署端口为 181 端口），那么这里的 URL 也需要加上端口号，格式为 <code>{网址}:{端口}</code> - 不过不必担心，如果你这里的 URL 配置不正确，那么访问 Tiny Tiny RSS 的时候，Tiny Tiny RSS 会提醒你修改这里的值为正确的 URL，按照提醒进行配置即可（<strong>最好一开始使用<a href="http://{your" target="_blank" rel="noopener">http://{your</a> ip}:181/这种格式，先验证ttrss没有出错</strong>）</li></ul><p>之后，我们保存配置文件，启动 Tiny Tiny RSS 服务。在刚刚的 <code>ttrss</code> 目录下执行：</p><div class="hljs"><pre><code class="hljs bash">docker-compose up -d</code></pre></div><p>等待脚本执行完成，如果一切没有问题，那么接下来输入 <code>docker ps</code>，我们应该看到类似下面的结果：</p><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220309-5.jpg" srcset="/img/loading.gif" alt="查看正在运行的 Docker 容器">查看正在运行的 Docker 容器</p><p>上面内容表示我们开启了四个 Docker 容器，分别是：</p><ul><li>Tiny Tiny RSS 本身，监听端口为 <code>0.0.0.0:181 -&gt; 80</code>，同时暴露给外网</li><li>PostgreSQL 数据库，仅供内部使用</li><li>Mercury 全文抓取服务，仅供内部使用</li><li>OpenCC 简体、繁体中文转换服务，仅供内部使用</li></ul><p>如果发现问题，修改 docker-compose 配置文件后，需要执行下面的命令重启 Docker 容器们：</p><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 关闭 Docker 容器们</span>
+docker-compose down
+
+<span class="hljs-comment"># 删除已停止的 Docker 容器</span>
+docker-compose rm
+
+<span class="hljs-comment"># ……</span>
+<span class="hljs-comment"># 修改 docker-compose 配置文件</span>
+<span class="hljs-comment"># ……</span>
+
+<span class="hljs-comment"># 再次开启 Docker 服务</span>
+docker-compose up -d</code></pre></div><h3 id="2-4-迁移原始服务器备份文件"><a href="#2-4-迁移原始服务器备份文件" class="headerlink" title="2.4 迁移原始服务器备份文件"></a>2.4 迁移原始服务器备份文件</h3><p><strong>1.4方法一后续：</strong></p><div class="hljs"><pre><code class="hljs haskell">先docker-compose down，然后执行 rm -rf ~/postgres/<span class="hljs-class"><span class="hljs-keyword">data</span>/</span>
+
+<span class="hljs-meta">#在原始vps操作下面命令，将文件迁移到新vps的root账户，弹出命令行要输入新vps密码</span>
+<span class="hljs-title">scp</span> -r ./postgres.tar.gz root@&#123;新vps ip&#125;:/root/
+<span class="hljs-meta">#创建文件夹</span>
+<span class="hljs-title">mkdir</span> -p ~/postgres/<span class="hljs-class"><span class="hljs-keyword">data</span>/</span>
+<span class="hljs-meta">#解压</span>
+<span class="hljs-title">tar</span> zxvf  postgres.tar.gz -<span class="hljs-type">C</span> ~/postgres/<span class="hljs-class"><span class="hljs-keyword">data</span>/</span>
+
+最后docker-compose up -d</code></pre></div><p>1.4方法二后续：</p><div class="hljs"><pre><code class="hljs elixir"><span class="hljs-comment">#在原始vps操作下面命令，将文件迁移到新vps的root账户，弹出命令行要输入新vps密码</span>
+scp -r ./export.sql root@&#123;新vps ip&#125;<span class="hljs-symbol">:/root/</span>
+<span class="hljs-comment">#第二个postgres为1.4步骤的用户名</span>
+cat export.sql | docker exec -i postgres psql -U postgres</code></pre></div><p><strong>打开<a href="http://{your" target="_blank" rel="noopener">http://{your</a> ip}:181/检查是否迁移完成</strong></p><h2 id="3-安装-Nginx（非必选，适合需要HTTPS访问用户）"><a href="#3-安装-Nginx（非必选，适合需要HTTPS访问用户）" class="headerlink" title="3 安装 Nginx（非必选，适合需要HTTPS访问用户）"></a>3 安装 Nginx（非必选，适合需要HTTPS访问用户）</h2><p>Debian及Ubuntu添加Nginx官方源</p><p>和CentOS类似，我们也需要更改系统的源仓库文件，只是我们按照习惯，可以不用新建文件，直接在现有的源仓库文件上添加两行就行了。</p><p>用编辑器打开<strong><em>/etc/apt/sources.list</em></strong>，Debian添加如下内容：</p><div class="hljs"><pre><code class="hljs crystal">deb <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/nginx.org/packages</span><span class="hljs-regexp">/debian/</span> codename nginx
+deb-src <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/nginx.org/packages</span><span class="hljs-regexp">/debian/</span> codename nginx</code></pre></div><p>然后根据实际发行版代号，替换上面的<strong><em>code\</em></strong>为实际的发行版代号，相关代号可以用命令<strong><em>cat /etc/os-release</em></strong>查询得到。</p><p>添加完成之后，还需要添加Nginx官方的Key，不然会提示Key错误，命令如下：</p><div class="hljs"><pre><code class="hljs sas">wget https://nginx.org/keys/nginx_signing.<span class="hljs-meta">key</span> -O /tmp/nginx_signing.<span class="hljs-meta">key</span>
+apt-<span class="hljs-meta">key</span> <span class="hljs-meta">add</span> /tmp/nginx_signing.<span class="hljs-meta">key</span></code></pre></div><p>添加完成之后，要先更新仓库源信息才能安装Nginx：</p><div class="hljs"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> update
+apt<span class="hljs-built_in"> upgrade </span>nginx</code></pre></div><p>安装之后，可以通过如下命令查看Nginx的版本：</p><div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">nginx -v</span></code></pre></div><p>之后开启 Nginx 服务：</p><div class="hljs"><pre><code class="hljs bash">sudo systemctl start nginx</code></pre></div><p>检查 Nginx 是否启动成功：</p><div class="hljs"><pre><code class="hljs bash">sudo systemctl status nginx</code></pre></div><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220309-6.jpg" srcset="/img/loading.gif" alt="检查 Nginx 运行状态">检查 Nginx 运行状态</p><h3 id="签署-SSL-证书，部署-HTTPS"><a href="#签署-SSL-证书，部署-HTTPS" class="headerlink" title="签署 SSL 证书，部署 HTTPS"></a>签署 SSL 证书，部署 HTTPS</h3><p>之后，我们利用 Let’s Encrypt 提供的 <code>certbot</code> 直接为 Nginx 配置 SSL 证书。首先，我们执行下面的命令安装 <code>certbot</code>：</p><div class="hljs"><pre><code class="hljs vim">apt install <span class="hljs-keyword">python3</span>-acme <span class="hljs-keyword">python3</span>-certbot <span class="hljs-keyword">python3</span>-mock <span class="hljs-keyword">python3</span>-openssl <span class="hljs-keyword">python3</span>-pkg-resources <span class="hljs-keyword">python3</span>-pyparsing <span class="hljs-keyword">python3</span>-zope.interface</code></pre></div><div class="hljs"><pre><code class="hljs bash">apt install certbot python3-certbot-nginx</code></pre></div><p>然后运行 <code>certbot</code> 来签署 SSL 证书并自动配置 Nginx 服务：</p><div class="hljs"><pre><code class="hljs bash">sudo certbot --nginx</code></pre></div><h4 id="输入邮箱"><a href="#输入邮箱" class="headerlink" title="输入邮箱"></a>输入邮箱</h4><p><img src="https://img-blog.csdnimg.cn/20200409221540733.png" srcset="/img/loading.gif" alt="邮箱"></p><h4 id="同意"><a href="#同意" class="headerlink" title="同意"></a>同意</h4><p>输入a<br><img src="https://img-blog.csdnimg.cn/20200409221633448.png" srcset="/img/loading.gif" alt="同意"><br>输入y<br><img src="https://img-blog.csdnimg.cn/2020040922170731.png" srcset="/img/loading.gif" alt="y"></p><h4 id="配置用户"><a href="#配置用户" class="headerlink" title="配置用户"></a>配置用户</h4><p><img src="https://img-blog.csdnimg.cn/20200409221812208.png" srcset="/img/loading.gif" alt="配置用户"><br>先输入c退出,然后这里我们需要去nginx配置我们的用户名字<br><code>nano /etc/nginx/conf.d/default.conf</code> (根据自己的实际情况)<br>将local换成你要解析的域名保存退出<br><img src="https://img-blog.csdnimg.cn/2020040922211851.png" srcset="/img/loading.gif" alt="域名"><br>执行<code>certbot --nginx</code> 重新执行1,2步骤<br>选择你要配置的域名<br><img src="https://img-blog.csdnimg.cn/20200409222326868.png" srcset="/img/loading.gif" alt="选择域名"></p><h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><p>1是保留80<br>2是将80指向安装的https<br>根据个人需要选择(我选择了1)<br><img src="https://img-blog.csdnimg.cn/20200409222749616.png" srcset="/img/loading.gif" alt="重定向"></p><h4 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h4><p><img src="https://img-blog.csdnimg.cn/20200409222827349.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjE4Mzg1NA==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="成功"></p><p>可以去那个地址查看证书,接着</p><div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart nginx</span></code></pre></div><p>接下来，我们修改 Nginx 的配置文件，配置 Nginx 反向代理，将访问 <code>https://ttrss.tenkeyseven.com</code> 的请求指向我们刚刚部署好的 Tiny Tiny RSS 服务，对服务器来说，也就是 <code>127.0.0.1:181</code> 这一地址。（如果你没有更改 Tiny Tiny RSS 的端口号的话。）</p><p>Nginx 的配置文件位于 <code>/etc/nginx/nginx.conf</code>，我们打开这一文件：</p><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220309-8.png" srcset="/img/loading.gif" alt="Nginx 配置文件">Nginx 配置文件</p><ul><li><p>在 <code>http</code> 项下，<code>server</code> 项前定义 <code>upstream</code> 服务：</p><div class="hljs"><pre><code class="hljs text">ttrssdev不用换
+&#96;&#96;&#96;
+upstream ttrssdev &#123;
+	server 127.0.0.1:181;
+	keepalive 64;
+&#125;
+&#96;&#96;&#96;
+  
+![Nginx upstream 服务声明](https:&#x2F;&#x2F;cdn.spencer.felinae98.cn&#x2F;blog&#x2F;2020&#x2F;07&#x2F;20200722-220309-9.jpg)</code></pre></div></li><li><p>在刚刚 <code>certbot</code> 为我们生成好的响应域名 <code>server</code> 项下，注释掉第一行定义 <code>root</code> 的内容，并将 <code>location /</code> 项修改为：</p><div class="hljs"><pre><code class="hljs text">&#96;&#96;&#96;
+location &#x2F; &#123;
+	proxy_redirect off;
+	proxy_pass http:&#x2F;&#x2F;ttrssdev;
+  
+	proxy_set_header  Host                $http_host;
+	proxy_set_header  X-Real-IP           $remote_addr;
+	proxy_set_header  X-Forwarded-Ssl     on;
+	proxy_set_header  X-Forwarded-For     $proxy_add_x_forwarded_for;
+	proxy_set_header  X-Forwarded-Proto   $scheme;
+	proxy_set_header  X-Frame-Options     SAMEORIGIN;
+  
+	client_max_body_size        100m;
+	client_body_buffer_size     128k;
+  
+	proxy_buffer_size           4k;
+	proxy_buffers               4 32k;
+	proxy_busy_buffers_size     64k;
+	proxy_temp_file_write_size  64k;
+&#125;
+&#96;&#96;&#96;
+  
+![Nginx 配置文件：反向代理配置](https:&#x2F;&#x2F;cdn.spencer.felinae98.cn&#x2F;blog&#x2F;2020&#x2F;07&#x2F;20200722-220309-10.jpg)</code></pre></div></li></ul><p>这样，先执行<code>nginx -t</code>验证nginx没有错误，然后再次执行 <code>sudo systemctl restart nginx</code> 重启 Nginx 服务，一切顺利的话，我们就可以通过我们刚刚签署 SSL 证书的域名访问我们部署好的 Tiny Tiny RSS 服务了</p><p>Tiny Tiny RSS 的默认管理员账户密码是 admin 和 password，请在第一时间进行修改。</p><h2 id="4-修改docker-compose-yml"><a href="#4-修改docker-compose-yml" class="headerlink" title="4 修改docker-compose.yml"></a>4 修改docker-compose.yml</h2><p>将docker-compose.yml中以下内容修改</p><div class="hljs"><pre><code class="hljs ini"><span class="hljs-attr">SELF_URL_PATH</span>=新https地址</code></pre></div><p>然后直接执行</p><div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span></code></pre></div><h3 id="4-1-查看-Docker-内所有容器的-IP，更换ttrss内插件IP地址"><a href="#4-1-查看-Docker-内所有容器的-IP，更换ttrss内插件IP地址" class="headerlink" title="4.1 查看 Docker 内所有容器的 IP，更换ttrss内插件IP地址"></a>4.1 查看 Docker 内所有容器的 IP，更换ttrss内插件IP地址</h3><div class="hljs"><pre><code class="hljs reasonml">docker inspect --format='&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;<span class="hljs-keyword">end</span>&#125;&#125;' <span class="hljs-constructor">$(<span class="hljs-params">docker</span> <span class="hljs-params">ps</span> -<span class="hljs-params">aq</span>)</span></code></pre></div><h3 id="4-2-后期修改地址"><a href="#4-2-后期修改地址" class="headerlink" title="4.2 后期修改地址"></a>4.2 后期修改地址</h3><p>通过certbot —nginx新注册地址，然后修改docker-compose.yml，具体步骤参考上面流程</p><h3 id="4-3-如何正确设置-Mercury-全文抓取和-OpenCC-繁简转换-API"><a href="#4-3-如何正确设置-Mercury-全文抓取和-OpenCC-繁简转换-API" class="headerlink" title="4.3 如何正确设置 Mercury 全文抓取和 OpenCC 繁简转换 API"></a>4.3 如何正确设置 Mercury 全文抓取和 OpenCC 繁简转换 API</h3><p>如果你使用了 Awesome TTRSS 中包含的 Mercury 全文抓取和 OpenCC 繁简转换 API，那么你应该在 <code>docker ps</code> 的输出中看到这两个服务的身影：</p><p><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/20200722-220455-7.png" srcset="/img/loading.gif" alt="docker ps 的输出">docker ps 的输出</p><p>如果你这两个服务的配置和原配置一致：</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-attr">service.mercury:</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">wangqiru/mercury-parser-api:latest</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">mercury</span>
+  <span class="hljs-attr">expose:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-number">3000</span>
+  <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
+
+<span class="hljs-attr">service.opencc:</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">wangqiru/opencc-api-server:latest</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">opencc</span>
+  <span class="hljs-attr">environment:</span>
+    <span class="hljs-attr">NODE_ENV:</span> <span class="hljs-string">production</span>
+  <span class="hljs-attr">expose:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-number">3000</span>
+  <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span></code></pre></div><p>那么，你只需要在 Tiny Tiny RSS 的 Preferences 中开启这两个插件，并将 API 地址依次设置为如下即可。（Docker 会自动探索相应的服务 API 地址。）</p><div class="table-container"><table><thead><tr><th>Mercury</th><th>OpenCC</th></tr></thead><tbody><tr><td><code>service.mercury:3000</code></td><td><code>service.opencc:3000</code></td></tr><tr><td><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/Snipaste_2020-07-22_22-13-39.png" srcset="/img/loading.gif" alt="Mercury 全文抓取">Mercury 全文抓取</td><td><img src="https://cdn.spencer.felinae98.cn/blog/2020/07/Snipaste_2020-07-22_22-14-10.png" srcset="/img/loading.gif" alt="OpenCC 繁简转换">OpenCC 繁简转换</td></tr></tbody></table></div><p>注意，你需要在每一个订阅源中明确指定使用 Mercury 或 OpenCC 服务（右键编辑），才可以真正保证服务的准确运行。</p><h2 id="5-Tiny-Tiny-RSS更新之后非80-443端口无法使用解决方法"><a href="#5-Tiny-Tiny-RSS更新之后非80-443端口无法使用解决方法" class="headerlink" title="5 Tiny Tiny RSS更新之后非80 443端口无法使用解决方法"></a>5 Tiny Tiny RSS更新之后非80 443端口无法使用解决方法</h2><p>既然需要采用80或443端口，那么很容易的可以用nginx中的location作处理。<br>思路:<br>example.com ===&gt; 正常范访问Tiny Tiny RSS后台<br>www.example.com ===&gt; 访问RSSHub进行订阅</p><blockquote><div class="hljs"><pre><code class="hljs gradle">nano <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/conf.d/</span><span class="hljs-keyword">default</span>.conf</code></pre></div></blockquote><div class="hljs"><pre><code class="hljs xml">#配置正常访问Tiny Tiny RSS后台（在文件最后，访问80端口添加第二段server，第一段server不添加）
+server &#123;
+    listen 80;
+    server_name example.com;
+      return 301 https://example.com$request_uri;
+&#125;
+
+#配置正常访问RssHub后台（反向代理）
+server &#123;
+    listen 80;
+    server_name www.example.com;
+    location / &#123; 
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Nginx-Proxy true;
+    #这里为RSSHub服务器端口
+    proxy_pass http://127.0.0.1:1200/;
+    proxy_redirect off;
+    &#125;
+&#125;</code></pre></div><p><code>systemctl restart nginx</code><br><img src="https://raw.githubusercontent.com/8430177/imgHub/master/uPic/6L8Ceb.png" srcset="/img/loading.gif" alt="6L8Ceb"></p><h3 id="其他问题参考"><a href="#其他问题参考" class="headerlink" title="其他问题参考"></a>其他问题参考</h3><p><a href="https://blog.spencerwoo.com/2019/11/tiny-tiny-rss/" target="_blank" rel="noopener">https://blog.spencerwoo.com/2019/11/tiny-tiny-rss/</a></p><p><a href="https://blog.spencerwoo.com/2020/03/ttrss-noteworthy/" target="_blank" rel="noopener">https://blog.spencerwoo.com/2020/03/ttrss-noteworthy/</a></p><p><a href="http://ttrss.henry.wang/zh/" target="_blank" rel="noopener">http://ttrss.henry.wang/zh/</a></p></article><hr><div><div class="post-metas mb-3"></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"></div><div class="post-next col-6"><a href="/posts/b78bb9ab.html"><span class="hidden-mobile">dw33d 编译最新ssrplus潘多拉固件</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"U5EjlpwRPtyuJbkw3W4fnYmS-MdYXbMMI",app_key:"KwvDqIaX2gD0Uz16BBBFOFpe",placeholder:"说点什么",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!1,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="statistics"><span id="leancloud-site-pv-container" style="display:none">总访问量 <span id="leancloud-site-pv"></span> 次 </span><span id="leancloud-site-uv-container" style="display:none">总访客数 <span id="leancloud-site-uv"></span> 人</span></div></div><div><span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("06/06/2020 00:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站安全运行&nbsp"+dnum+"&nbsp天",document.getElementById("times").innerHTML=hnum+"&nbsp小时&nbsp"+mnum+"&nbsp分&nbsp"+snum+"&nbsp秒"}setInterval("createtime()",250)</script></div><p id="hitokoto">:D 获取中...</p><script>fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto')
+      hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)</script></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script defer>(function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/posts/eeda3c21.html');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'daehpApznWemki2mAr5g5iUk-MdYXbMMI'
+    var app_key = '7k2qX6C31gEh2CuXOSKXyYW3'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();</script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script defer>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject="ga",e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script"),ga("create","UA-168739774-1","auto"),ga("send","pageview")</script></body></html>
